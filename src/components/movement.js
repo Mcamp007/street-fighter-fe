@@ -13,11 +13,14 @@ class App extends Component {
       locationArr: [0,1,2,3,4,5,6,7],
       p1Location: 0,
       p2Location: 0,
-      isLiked: false
+      standingMov: false,
+      punchMov: false
     }
   }
 
   componentDidMount() {
+    window.addEventListener('onKeyUp', this.handleStop.bind(this, event), false)
+
      window.addEventListener('keydown', this.margin.bind(this, event), false)
       this.setState({p1Location: this.state.locationArr[0],
                     p2Location: this.state.locationArr[this.state.locationArr.length - 1]
@@ -25,15 +28,16 @@ class App extends Component {
       this.startAction()
    }
 
-
+  //
    startAction () {
-    const {isLiked} = this.state.isLiked
-    this.setState({isLiked: !isLiked})
+    //  console.log(event);
+    this.setState({standingMov: true})
+
   }
 
-  handleStop() {
-    console.log("hi");
-    this.setState({isLiked: false})
+  handleStop(event) {
+    // console.log(event);
+
 }
 
   margin () {
@@ -63,48 +67,81 @@ class App extends Component {
                    p2Location: this.state.p2Location + 1
       })
     }
-    //68 == d
+
+    if(event.keyCode == 80) {
+      if(this.state.punchMov === false) {
+        this.setState({ standingMov: false,
+                        punchMov: true
+          })
+      }
+    }
+
+    else {
+      this.setState({ standingMov: true,
+                      punchMov: false
+        })
+
+    }
     console.log(this.state.p1Location, this.state.p2Location);
     // console.log(this.state.marginP2);
-    if (this.state.p1Location + 1 === this.state.p2Location){
+    if (this.state.p1Location + 1 === this.state.p2Location && this.state.punchMov === true){
       console.log("can loose hp");
-      if(event.keyCode == 80) {
-        console.log("lost HP through punch");
-      }
+      console.log("lost HP through punch");
     }
   }
 
 
   render() {
-    const {isLiked} = this.state
+    const {standingMov} = this.state
+    const {punchMov} = this.state
     const leftMargin = {
       marginLeft: this.state.margin + 'vw'
 
     };
     const rightMargin = {
       marginRight: this.state.marginP2 + 'vw'
-
     }
-    // console.log(rightMargin.marginRight);
+
+    const standingMovement = (
+      <div className="leftMargin">
+        <div style={leftMargin}>
+          <SpriteAnimator
+            ref='sprite'
+            width={89}
+            height={100}
+            sprite='../src/p1.svg'
+            shouldAnimate={standingMov}
+            fps={10}
+            startFrame={0}
+            stopLastFrame={false}
+            reset={true}
+          />
+        </div>
+      </div>
+    )
+    const punchMovement = (
+      <div className="leftMargin">
+        <div style={leftMargin}>
+          <SpriteAnimator
+            ref='sprite'
+            width={82}
+            height={105}
+            sprite='../src/punch.svg'
+            shouldAnimate={punchMov}
+            fps={10}
+            startFrame={0}
+            stopLastFrame={true}
+            reset={!punchMov}
+          />
+        </div>
+      </div>
+    )
+console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
       <div>
         <h1>Movement</h1>
         <div className="container">
-          <div className="leftMargin">
-            <div style={leftMargin}>
-              <SpriteAnimator
-                ref='sprite'
-                width={89}
-                height={100}
-                sprite='../src/p1.svg'
-                shouldAnimate={isLiked}
-                fps={10}
-                startFrame={0}
-                stopLastFrame={false}
-                reset={!isLiked}
-              />
-            </div>
-          </div>
+            {this.state.punchMov == true ? punchMovement : standingMovement}
           <div className="rightMargin">
             <div style={rightMargin}>
               <SpriteAnimator
@@ -112,11 +149,11 @@ class App extends Component {
                 width={88}
                 height={100}
                 sprite='../src/p2.svg'
-                shouldAnimate={isLiked}
+                shouldAnimate={true}
                 fps={10}
                 startFrame={0}
                 stopLastFrame={false}
-                reset={!isLiked}
+                reset={false}
               />
             </div>
           </div>
