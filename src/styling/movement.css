@@ -1,12 +1,12 @@
 .leftMargin {
   float: left;
   position: relative;
-  border: solid pink 1px;
+  /*border: solid pink 1px;*/
 }
 
 
 .rightMargin {
   position: relative;
   float: right;
-  border: solid blue 1px;
+  /*border: solid blue 1px;*/
 }

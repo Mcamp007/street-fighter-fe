@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import '../styling/movement.css';
+import SpriteAnimator from 'react-sprite-animator'
 
 
 class App extends Component {
@@ -11,7 +12,8 @@ class App extends Component {
       marginP2: 0,
       locationArr: [0,1,2,3,4,5,6,7,8,9],
       p1Location: 0,
-      p2Location: 0
+      p2Location: 0,
+      isLiked: false
     }
   }
 
@@ -20,7 +22,19 @@ class App extends Component {
       this.setState({p1Location: this.state.locationArr[0],
                     p2Location: this.state.locationArr[this.state.locationArr.length - 1]
       })
+      this.startAction()
    }
+
+
+   startAction () {
+    const {isLiked} = this.state.isLiked
+    this.setState({isLiked: !isLiked})
+  }
+
+  handleStop() {
+    console.log("hi");
+    this.setState({isLiked: false})
+}
 
   margin () {
   // console.log(event);
@@ -68,12 +82,12 @@ class App extends Component {
 
 
   render() {
-
+    const {isLiked} = this.state
     const leftMargin = {
-      marginLeft: this.state.margin + 'vw',
-      backgroundColor: 'pink',
-      width: 100,
-      height: 300,
+      marginLeft: this.state.margin + 'vw'
+      // backgroundColor: 'pink'
+      // width: 100,
+      // height: 300,
     };
     const rightMargin = {
       marginRight: this.state.marginP2 + 'vw',
@@ -87,7 +101,19 @@ class App extends Component {
         <h1>Movement</h1>
         <div className="container">
           <div className="leftMargin">
-            <div style={leftMargin}></div>
+            <div style={leftMargin}>
+              <SpriteAnimator
+                ref='sprite'
+                width={89}
+                height={100}
+                sprite='../src/nw8UyWV01.svg'
+                shouldAnimate={isLiked}
+                fps={10}
+                startFrame={0}
+                stopLastFrame={false}
+                reset={!isLiked}
+              />
+            </div>
           </div>
           <div className="rightMargin">
             <div style={rightMargin}></div>
