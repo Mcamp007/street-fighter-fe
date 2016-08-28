@@ -45,7 +45,7 @@ class App extends Component {
       })
     }
     if (event.keyCode == 65){
-      this.setState({marginP2: currentMarginP2 + 10,
+      this.setState({marginP2: currentMarginP2 +git a 10,
                    p2Location: this.state.p2Location - 1
       })
     }
