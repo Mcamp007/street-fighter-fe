@@ -116,7 +116,19 @@ class App extends Component {
             </div>
           </div>
           <div className="rightMargin">
-            <div style={rightMargin}></div>
+            <div style={rightMargin}>
+              <SpriteAnimator
+                ref='sprite'
+                width={150}
+                height={170}
+                sprite='../src/qylvl-0dhkn.svg'
+                shouldAnimate={isLiked}
+                fps={15}
+                startFrame={0}
+                stopLastFrame={false}
+                reset={!isLiked}
+              />
+            </div>
           </div>
         </div>
       </div>
