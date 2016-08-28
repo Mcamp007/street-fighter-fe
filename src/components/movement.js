@@ -40,18 +40,18 @@ class App extends Component {
       })
     }
     if (event.keyCode == 68){
-      this.setState({marginP2: currentMarginP2 + 10,
+      this.setState({marginP2: currentMarginP2 - 10,
         p2Location: this.state.p2Location + 1
       })
     }
     if (event.keyCode == 65){
-      this.setState({marginP2: currentMarginP2 - 10,
+      this.setState({marginP2: currentMarginP2 + 10,
                    p2Location: this.state.p2Location - 1
       })
     }
 
     console.log(this.state.p1Location, this.state.p2Location);
-console.log(this.state.marginP2);
+    console.log(this.state.marginP2);
     if (this.state.p1Location + 1 === this.state.p2Location){
       console.log("can loose hp");
       if(event.keyCode == 80) {
