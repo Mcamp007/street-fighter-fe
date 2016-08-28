@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       margin: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7,8,9,10],
+      locationArr: [0,1,2,3,4,5,6,7],
       p1Location: 0,
       p2Location: 0
     }
@@ -30,29 +30,29 @@ class App extends Component {
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
     if( event.keyCode == 39 ) {
-      this.setState({margin: currentMargin + 100,
+      this.setState({margin: currentMargin + 200,
                     p1Location: this.state.p1Location + 1
       })
     }
-    if( event.keyCode == 37 && currentMargin >= 0 ) {
-      this.setState({margin: currentMargin - 100,
+    if( event.keyCode == 37) {
+      this.setState({margin: currentMargin - 200,
         p1Location: this.state.p1Location - 1
 
       })
     }
     if (event.keyCode == 65){
-      this.setState({marginP2: currentMarginP2 + 100,
+      this.setState({marginP2: currentMarginP2 + 200,
         p2Location: this.state.p2Location - 1
       })
     }
     if (event.keyCode == 68){
-      this.setState({marginP2: currentMarginP2 - 100,
+      this.setState({marginP2: currentMarginP2 - 200,
                    p2Location: this.state.p2Location + 1
       })
     }
 
     console.log(this.state.p1Location, this.state.p2Location);
-
+console.log(this.state.marginP2);
     if (this.state.p1Location + 1 === this.state.p2Location){
       console.log("can loose hp");
       if(event.keyCode == 80) {
@@ -65,17 +65,18 @@ class App extends Component {
   render() {
 
     const leftMargin = {
-      marginLeft: this.state.margin,
+      marginLeft: this.state.margin + '%',
       backgroundColor: 'pink',
       width: 100,
       height: 300,
     };
     const rightMargin = {
+      marginRight: this.state.marginP2 + '%',
       backgroundColor: 'black',
-      marginRight: this.state.marginP2,
       width: 100,
       height: 300
     }
+    console.log(rightMargin.marginRight);
     return (
       <div>
         <h1>Movement</h1>
