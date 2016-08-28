@@ -79,15 +79,11 @@ class App extends Component {
     const {isLiked} = this.state
     const leftMargin = {
       marginLeft: this.state.margin + 'vw'
-      // backgroundColor: 'pink'
-      // width: 100,
-      // height: 300,
+
     };
     const rightMargin = {
-      marginRight: this.state.marginP2 + 'vw',
-      backgroundColor: 'black',
-      width: 100,
-      height: 300
+      marginRight: this.state.marginP2 + 'vw'
+
     }
     // console.log(rightMargin.marginRight);
     return (
@@ -100,7 +96,7 @@ class App extends Component {
                 ref='sprite'
                 width={89}
                 height={100}
-                sprite='../src/nw8UyWV01.svg'
+                sprite='../src/p1.svg'
                 shouldAnimate={isLiked}
                 fps={10}
                 startFrame={0}
@@ -110,7 +106,19 @@ class App extends Component {
             </div>
           </div>
           <div className="rightMargin">
-            <div style={rightMargin}></div>
+            <div style={rightMargin}>
+              <SpriteAnimator
+                ref='sprite'
+                width={89}
+                height={100}
+                sprite='../src/p2.svg'
+                shouldAnimate={isLiked}
+                fps={10}
+                startFrame={0}
+                stopLastFrame={false}
+                reset={!isLiked}
+              />
+            </div>
           </div>
         </div>
       </div>
