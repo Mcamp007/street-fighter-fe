@@ -58,18 +58,7 @@ class App extends Component {
       if(event.keyCode == 80) {
         console.log("lost HP through punch");
       }
-      // else {
-      //   console.log("out of range");
-      // }
     }
-    // console.log(this.state.arr[this.state.p1Location], this.state.arr[this.state.arr - this.state.p2Location]);
-
-
-    // const currentLocation =
-    // console.log(this.state.p1Location);
-    // console.log(this.state.arr);
-
-
   }
 
 
