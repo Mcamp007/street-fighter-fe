@@ -109,7 +109,7 @@ class App extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={89}
+                width={88}
                 height={100}
                 sprite='../src/p2.svg'
                 shouldAnimate={isLiked}
