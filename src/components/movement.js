@@ -29,29 +29,32 @@ class App extends Component {
 
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
-    if( event.keyCode == 39) {
+
+
+    if( event.keyCode == 39 && this.state.p1Location + 1 !== this.state.p2Location) {
+
       this.setState({margin: currentMargin + 10,
                     p1Location: this.state.p1Location + 1
       })
     }
-    if( event.keyCode == 37) {
+    if( event.keyCode == 37 && this.state.margin > 0) {
       this.setState({margin: currentMargin - 10,
         p1Location: this.state.p1Location - 1
       })
     }
-    if (event.keyCode == 68){
+    if (event.keyCode == 68 && this.state.margin < '100vw'){
       this.setState({marginP2: currentMarginP2 + 10,
         p2Location: this.state.p2Location + 1
       })
     }
-    if (event.keyCode == 65){
+    if (event.keyCode == 65 ){
       this.setState({marginP2: currentMarginP2 - 10,
                    p2Location: this.state.p2Location - 1
       })
     }
 
     console.log(this.state.p1Location, this.state.p2Location);
-console.log(this.state.marginP2);
+    // console.log(this.state.marginP2);
     if (this.state.p1Location + 1 === this.state.p2Location){
       console.log("can loose hp");
       if(event.keyCode == 80) {
