@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       margin: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7,8,9],
+      locationArr: [0,1,2,3,4,5,6,7],
       p1Location: 0,
       p2Location: 0,
       isLiked: false
@@ -44,22 +44,22 @@ class App extends Component {
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
     if( event.keyCode == 39 && this.state.p1Location + 1 !== this.state.p2Location) {
-      this.setState({margin: currentMargin + 10,
+      this.setState({margin: currentMargin + 14.6,
                     p1Location: this.state.p1Location + 1
       })
     }
     if( event.keyCode == 37 && this.state.margin > 0) {
-      this.setState({margin: currentMargin - 10,
+      this.setState({margin: currentMargin - 14.6,
         p1Location: this.state.p1Location - 1
       })
     }
     if (event.keyCode == 65  && this.state.p1Location + 1 !== this.state.p2Location){
-      this.setState({marginP2: currentMarginP2 + 10,
+      this.setState({marginP2: currentMarginP2 + 14.6,
         p2Location: this.state.p2Location - 1
       })
     }
     if (event.keyCode == 68 && this.state.p2Location < this.state.locationArr[this.state.locationArr.length -1]){
-      this.setState({marginP2: currentMarginP2 - 10,
+      this.setState({marginP2: currentMarginP2 - 14.6,
                    p2Location: this.state.p2Location + 1
       })
     }
