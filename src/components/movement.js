@@ -29,7 +29,7 @@ class App extends Component {
 
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
-    if( event.keyCode == 39 ) {
+    if( event.keyCode == 39) {
       this.setState({margin: currentMargin + 10,
                     p1Location: this.state.p1Location + 1
       })
