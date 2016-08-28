@@ -20,15 +20,9 @@ class App extends Component {
       this.setState({p1Location: this.state.locationArr[0],
                     p2Location: this.state.locationArr[this.state.locationArr.length - 1]
       })
-
-
    }
 
   margin () {
-
-
-// console.log(this.state.locationArr);
-    // console.log(this.state.marginP2);
   // console.log(event);
   const currentMargin = this.state.margin
   const currentLocation = this.state.p1Location
