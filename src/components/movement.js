@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       margin: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7],
+      locationArr: [0,1,2,3,4,5,6,7,8,9,10],
       p1Location: 0,
       p2Location: 0
     }
@@ -30,24 +30,23 @@ class App extends Component {
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
     if( event.keyCode == 39 ) {
-      this.setState({margin: currentMargin + 200,
+      this.setState({margin: currentMargin + 10,
                     p1Location: this.state.p1Location + 1
       })
     }
     if( event.keyCode == 37) {
-      this.setState({margin: currentMargin - 200,
+      this.setState({margin: currentMargin - 10,
         p1Location: this.state.p1Location - 1
-
-      })
-    }
-    if (event.keyCode == 65){
-      this.setState({marginP2: currentMarginP2 + 200,
-        p2Location: this.state.p2Location - 1
       })
     }
     if (event.keyCode == 68){
-      this.setState({marginP2: currentMarginP2 - 200,
-                   p2Location: this.state.p2Location + 1
+      this.setState({marginP2: currentMarginP2 + 10,
+        p2Location: this.state.p2Location + 1
+      })
+    }
+    if (event.keyCode == 65){
+      this.setState({marginP2: currentMarginP2 - 10,
+                   p2Location: this.state.p2Location - 1
       })
     }
 
@@ -65,13 +64,13 @@ console.log(this.state.marginP2);
   render() {
 
     const leftMargin = {
-      marginLeft: this.state.margin + '%',
+      marginLeft: this.state.margin + 'vw',
       backgroundColor: 'pink',
       width: 100,
       height: 300,
     };
     const rightMargin = {
-      marginRight: this.state.marginP2 + '%',
+      marginLeft: this.state.marginP2 + 'vw',
       backgroundColor: 'black',
       width: 100,
       height: 300
