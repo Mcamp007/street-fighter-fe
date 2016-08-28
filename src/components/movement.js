@@ -10,10 +10,11 @@ class App extends Component {
     this.state = {
       margin: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7,8,9],
+      locationArr: [0,1,2,3,4,5,6,7],
       p1Location: 0,
       p2Location: 0,
-      isLiked: false
+      isLiked: false,
+      sprite: "../src/p1.svg"
     }
   }
 
@@ -43,29 +44,23 @@ class App extends Component {
 
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
-
-
     if( event.keyCode == 39 && this.state.p1Location + 1 !== this.state.p2Location) {
-
-      this.setState({margin: currentMargin + 10,
+      this.setState({margin: currentMargin + 14.6,
                     p1Location: this.state.p1Location + 1
       })
     }
     if( event.keyCode == 37 && this.state.margin > 0) {
-      this.setState({margin: currentMargin - 10,
+      this.setState({margin: currentMargin - 14.6,
         p1Location: this.state.p1Location - 1
       })
     }
-
     if (event.keyCode == 65  && this.state.p1Location + 1 !== this.state.p2Location){
-
-      this.setState({marginP2: currentMarginP2 + 10,
+      this.setState({marginP2: currentMarginP2 + 14.6,
         p2Location: this.state.p2Location - 1
       })
     }
-
     if (event.keyCode == 68 && this.state.p2Location < this.state.locationArr[this.state.locationArr.length -1]){
-      this.setState({marginP2: currentMarginP2 - 10,
+      this.setState({marginP2: currentMarginP2 - 14.6,
                    p2Location: this.state.p2Location + 1
       })
     }
@@ -76,7 +71,16 @@ class App extends Component {
       console.log("can loose hp");
       if(event.keyCode == 80) {
         console.log("lost HP through punch");
+
       }
+    }
+  }
+
+  onKeyDown(event) {
+    if(event.keyCode === 80) {
+      this.setState({
+        sprite: '../src/punch.svg'
+      })
     }
   }
 
@@ -85,15 +89,11 @@ class App extends Component {
     const {isLiked} = this.state
     const leftMargin = {
       marginLeft: this.state.margin + 'vw'
-      // backgroundColor: 'pink'
-      // width: 100,
-      // height: 300,
+
     };
     const rightMargin = {
-      marginRight: this.state.marginP2 + 'vw',
-      backgroundColor: 'black',
-      width: 100,
-      height: 300
+      marginRight: this.state.marginP2 + 'vw'
+
     }
     // console.log(rightMargin.marginRight);
     return (
@@ -102,11 +102,11 @@ class App extends Component {
         <div className="container">
           <div className="leftMargin">
             <div style={leftMargin}>
-              <SpriteAnimator
+              <SpriteAnimator onKeyDown={this.onKeyDown.bind(this)}
                 ref='sprite'
                 width={89}
                 height={100}
-                sprite='../src/nw8UyWV01.svg'
+                sprite={this.state.sprite}
                 shouldAnimate={isLiked}
                 fps={10}
                 startFrame={0}
@@ -119,11 +119,11 @@ class App extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={150}
-                height={170}
-                sprite='../src/qylvl-0dhkn.svg'
+                width={88}
+                height={100}
+                sprite='../src/p2.svg'
                 shouldAnimate={isLiked}
-                fps={15}
+                fps={10}
                 startFrame={0}
                 stopLastFrame={false}
                 reset={!isLiked}
