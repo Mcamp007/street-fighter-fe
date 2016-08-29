@@ -45,13 +45,13 @@ class PlayerOne extends Component {
 
 
  render () {
-   const {standingMov} = this.props.moveStates
-   const {punchMov} = this.props.moveStates
+   const {standingMovP1} = this.props.moveStates
+   const {punchMovP1} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
 
-   const standingMovement = (
+   const standingMovementP1 = (
      <div className="leftMargin">
        <div style={leftMargin}>
          <SpriteAnimator
@@ -59,28 +59,28 @@ class PlayerOne extends Component {
            width={93.5}
            height={108}
            sprite='../src/standingmovP1.svg'
-           shouldAnimate={standingMov}
+           shouldAnimate={standingMovP1}
            fps={6}
            startFrame={0}
            stopLastFrame={false}
-           reset={!standingMov}
+           reset={!standingMovP1}
          />
        </div>
      </div>
    )
-   const punchMovement = (
+   const punchMovementP1 = (
      <div className="leftMargin">
        <div style={leftMargin}>
          <SpriteAnimator
            ref='sprite'
            width={73}
            height={108}
-           sprite='../src/punch3.svg'
-           shouldAnimate={punchMov}
+           sprite='../src/punchP1.svg'
+           shouldAnimate={punchMovP1}
            fps={40}
            startFrame={0}
            stopLastFrame={true}
-           reset={!punchMov}
+           reset={!punchMovP1}
          />
        </div>
      </div>
@@ -91,7 +91,7 @@ class PlayerOne extends Component {
     <div>
     <h1>I am player one </h1>
       <div className="container_p1">
-        {this.props.moveStates.punchMovP1 === true ? punchMovement : standingMovement}
+        {this.props.moveStates.punchMovP1 === true ? punchMovementP1 : standingMovementP1}
       </div>
     </div>
    )
