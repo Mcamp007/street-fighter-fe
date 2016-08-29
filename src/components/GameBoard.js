@@ -141,21 +141,6 @@ class App extends Component {
         <h1>Movement</h1>
         <div className="container">
             {this.state.punchMov === true ? punchMovement : standingMovement}
-          <div className="rightMargin">
-            <div style={rightMargin}>
-              <SpriteAnimator
-                ref='sprite'
-                width={93.5}
-                height={108}
-                sprite='../src/standingmovP2.svg'
-                shouldAnimate={true}
-                fps={6}
-                startFrame={0}
-                stopLastFrame={false}
-                reset={!standingMov}
-              />
-            </div>
-          </div>
         </div>
       </div>
     );
