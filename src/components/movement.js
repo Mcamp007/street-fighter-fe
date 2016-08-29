@@ -79,7 +79,7 @@ class App extends Component {
     // if (this.state.p1Location + 1 === this.state.p2Location && this.state.punchMov === true){ //might need this later
     if (this.state.p1Location + 1 === this.state.p2Location){
 
-          // console.log("can loose hp");
+
       if(event.keyCode === 80) {
               console.log("lost HP through punch");
       }
