@@ -37,7 +37,7 @@ class PlayerTwo extends Component {
     const {punchMovP2} = this.props.moveStates
     const rightMargin = {
       marginRight: this.props.moveStates.marginP2 + 'vw'
-    };
+      };
     const standingMovementP2 = (
       <div className="rightMargin">
         <div style={rightMargin}>
