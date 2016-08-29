@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import '../styling/movement.css';
 import SpriteAnimator from 'react-sprite-animator'
 
-
+///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
 class App extends Component {
   constructor(props){
     super(props)
