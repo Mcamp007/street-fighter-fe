@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import '../styling/movement.css';
 import SpriteAnimator from 'react-sprite-animator'
-import PlayerOne from './PlayerOne.js';
+import PlayerOne from './PlayerOne';
+import PlayerTwo from './PlayerTwo';
 
 
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
@@ -15,8 +16,10 @@ class App extends Component {
       locationArr: [0,1,2,3,4,5,6,7],
       p1Location: 0,
       p2Location: 0,
-      standingMov: true,
-      punchMov: false
+      standingMovP1: true,
+      punchMovP1: false,
+      standingMovP2: true,
+      punchMovP2: false
     }
   }
 
@@ -35,7 +38,8 @@ class App extends Component {
     })
   } else {
     this.setState({
-
+      marginP2: this.state.marginP2 + number,
+      p2Location: this.state.p2Location - position
     })
   }
   }
@@ -46,14 +50,19 @@ class App extends Component {
         marginP1: this.state.marginP1 - number,
         p1Location: this.state.p1Location - position
       })
+    } else {
+      this.setState({
+        marginP2: this.state.marginP2 - number,
+        p2Location: this.state.p2Location + position
+      })
     }
   }
 
   punch(standingMov, punchMov, player) {
     if(player === "player-1") {
       this.setState({
-        standingMov: standingMov,
-        punchMov: punchMov
+        standingMovP1: standingMov,
+        punchMovP1: punchMov
       })
     }
   }
@@ -65,7 +74,12 @@ class App extends Component {
       <div>
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
-                                           punch={this.punch.bind(this)}/>
+                                           punch={this.punch.bind(this)}
+        />
+        <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
+                                           moveBackward={this.moveBackward.bind(this)}
+
+        />
       </div>
     );
   }

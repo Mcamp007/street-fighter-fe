@@ -49,8 +49,8 @@ class PlayerOne extends Component {
    const {punchMov} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
-
    };
+
    const standingMovement = (
      <div className="leftMargin">
        <div style={leftMargin}>
@@ -89,10 +89,10 @@ class PlayerOne extends Component {
 
    return (
     <div>
-      <div className="container">
-        {this.props.moveStates.punchMov === true ? punchMovement : standingMovement}
+    <h1>I am player one </h1>
+      <div className="container_p1">
+        {this.props.moveStates.punchMovP1 === true ? punchMovement : standingMovement}
       </div>
-      <h1>I am player one </h1>
     </div>
    )
  }
