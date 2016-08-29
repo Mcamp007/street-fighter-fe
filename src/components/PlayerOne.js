@@ -18,10 +18,16 @@ class PlayerOne extends Component {
     if(event.keyCode === 83) {
       this.props.duck(true, false, "player-1")
     }
+
     if(event.keyCode === 87) {
-      this.props.jump(true, false, "player-1")
+      setTimeout(function(){
+        this.props.jump(true, false, "player-1");
+      }, 3000)
+
     }
   }
+
+
 
   movement() {
     // console.log(event);
@@ -130,7 +136,7 @@ class PlayerOne extends Component {
                    height={108}
                    sprite='../src/jumpP1.svg'
                    shouldAnimate={jumpMovP1}
-                   fps={3}
+                   fps={2}
                    startFrame={0}
                    stopLastFrame={true}
                    reset={!jumpMovP1}
