@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator';
+import '../styling/PlayerOne.css'
 
 class PlayerOne extends Component {
   constructor(props) {
@@ -34,10 +35,10 @@ class PlayerOne extends Component {
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
       if(event.keyCode === 80) {
-              console.log("lost HP through punch");
+              console.log("P2 lost HP through punch");
       }
       else if (event.keyCode === 75) {
-        console.log("lost HP through kick");
+        console.log("P2 lost HP through kick");
       }
     }
   }
@@ -89,7 +90,6 @@ class PlayerOne extends Component {
 
    return (
     <div>
-    <h1>I am player one </h1>
       <div className="container_p1">
         {this.props.moveStates.punchMovP1 === true ? punchMovementP1 : standingMovementP1}
       </div>

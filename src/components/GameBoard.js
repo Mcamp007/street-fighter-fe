@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import '../styling/movement.css';
 import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
@@ -17,7 +16,8 @@ class App extends Component {
       standingMovP1: true,
       punchMovP1: false,
       standingMovP2: true,
-      punchMovP2: false
+      punchMovP2: false,
+      duckMovP2: false
     }
   }
   componentDidMount() {
@@ -65,6 +65,17 @@ class App extends Component {
       })
     }
   }
+    duck(standingMov, duckMov, player) {
+      if(player === 'player-1'){
+        console.log("ha");
+      } else {
+        this.setState({
+          standingMovP2: standingMov,
+          duckMovP2: duckMov
+        })
+      }
+    }
+
   render() {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
@@ -76,6 +87,7 @@ class App extends Component {
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
+                                           duck={this.duck.bind(this)}
         />
       </div>
     );
