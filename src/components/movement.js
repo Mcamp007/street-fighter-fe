@@ -47,25 +47,26 @@ class App extends Component {
   const currentMarginP2 = this.state.marginP2
   const currentLocationP2 = this.state.p2Location
     if( event.keyCode === 39 && this.state.p1Location + 1 !== this.state.p2Location) {
-      this.setState({margin: currentMargin + 14.4,
+      this.setState({margin: currentMargin + 14.8,
                     p1Location: this.state.p1Location + 1
       })
     }
-    if( event.keyCode === 37 && this.state.margin > 0) {
-      this.setState({margin: currentMargin - 14.4,
+    if( event.keyCode === 37 && this.state.p1Location > 0) {
+      this.setState({margin: currentMargin - 14.8,
         p1Location: this.state.p1Location - 1
       })
     }
     if (event.keyCode === 65  && this.state.p1Location + 1 !== this.state.p2Location){
-      this.setState({marginP2: currentMarginP2 + 14.4,
+      this.setState({marginP2: currentMarginP2 + 14.8,
         p2Location: this.state.p2Location - 1
       })
     }
     if (event.keyCode === 68 && this.state.p2Location < this.state.locationArr[this.state.locationArr.length -1]){
-      this.setState({marginP2: currentMarginP2 - 14.4,
+      this.setState({marginP2: currentMarginP2 - 14.8,
                    p2Location: this.state.p2Location + 1
       })
     }
+
 
     if(event.keyCode === 80) {
         this.setState({ standingMov: false,
@@ -75,9 +76,16 @@ class App extends Component {
 
     console.log(this.state.p1Location, this.state.p2Location);
     // console.log(this.state.marginP2);
-    if (this.state.p1Location + 1 === this.state.p2Location && this.state.punchMov === true){
-      console.log("can loose hp");
-      console.log("lost HP through punch");
+    // if (this.state.p1Location + 1 === this.state.p2Location && this.state.punchMov === true){ //might need this later
+    if (this.state.p1Location + 1 === this.state.p2Location){
+
+          // console.log("can loose hp");
+      if(event.keyCode === 80) {
+              console.log("lost HP through punch");
+      }
+      else if (event.keyCode === 75) {
+        console.log("lost HP through kick");
+      }
     }
   }
 
@@ -102,7 +110,7 @@ class App extends Component {
             height={108}
             sprite='../src/standingmovP1.svg'
             shouldAnimate={standingMov}
-            fps={10}
+            fps={6}
             startFrame={0}
             stopLastFrame={false}
             reset={!standingMov}
@@ -132,7 +140,7 @@ class App extends Component {
       <div>
         <h1>Movement</h1>
         <div className="container">
-            {this.state.punchMov == true ? punchMovement : standingMovement}
+            {this.state.punchMov === true ? punchMovement : standingMovement}
           <div className="rightMargin">
             <div style={rightMargin}>
               <SpriteAnimator
@@ -141,7 +149,7 @@ class App extends Component {
                 height={108}
                 sprite='../src/standingmovP2.svg'
                 shouldAnimate={true}
-                fps={10}
+                fps={6}
                 startFrame={0}
                 stopLastFrame={false}
                 reset={!standingMov}
