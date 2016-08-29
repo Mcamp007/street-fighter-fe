@@ -13,13 +13,8 @@ class App extends Component {
       locationArr: [0,1,2,3,4,5,6,7],
       p1Location: 0,
       p2Location: 0,
-<<<<<<< HEAD
-      isLiked: false,
-      sprite: "../src/p1.svg"
-=======
       standingMov: false,
       punchMov: false
->>>>>>> c2aad3725cc4f5c61cc3dec1174f11585db1816f
     }
   }
 
@@ -91,22 +86,7 @@ class App extends Component {
     // console.log(this.state.marginP2);
     if (this.state.p1Location + 1 === this.state.p2Location && this.state.punchMov === true){
       console.log("can loose hp");
-<<<<<<< HEAD
-      if(event.keyCode == 80) {
-        console.log("lost HP through punch");
-
-      }
-=======
       console.log("lost HP through punch");
->>>>>>> c2aad3725cc4f5c61cc3dec1174f11585db1816f
-    }
-  }
-
-  onKeyDown(event) {
-    if(event.keyCode === 80) {
-      this.setState({
-        sprite: '../src/punch.svg'
-      })
     }
   }
 
@@ -161,25 +141,7 @@ console.log("standing move", this.state.standingMov, "punchMov", this.state.punc
       <div>
         <h1>Movement</h1>
         <div className="container">
-<<<<<<< HEAD
-          <div className="leftMargin">
-            <div style={leftMargin}>
-              <SpriteAnimator onKeyDown={this.onKeyDown.bind(this)}
-                ref='sprite'
-                width={89}
-                height={100}
-                sprite={this.state.sprite}
-                shouldAnimate={isLiked}
-                fps={10}
-                startFrame={0}
-                stopLastFrame={false}
-                reset={!isLiked}
-              />
-            </div>
-          </div>
-=======
             {this.state.punchMov == true ? punchMovement : standingMovement}
->>>>>>> c2aad3725cc4f5c61cc3dec1174f11585db1816f
           <div className="rightMargin">
             <div style={rightMargin}>
               <SpriteAnimator
