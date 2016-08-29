@@ -15,9 +15,16 @@ class PlayerOne extends Component {
     if(event.keyCode === 80) {
       this.props.punch(true, false, "player-1")
     }
+    if(event.keyCode === 83) {
+      this.props.duck(true, false, "player-1")
+    }
+    if(event.keyCode === 87) {
+      this.props.jump(true, false, "player-1")
+    }
   }
 
   movement() {
+    // console.log(event);
     const currentMargin = this.props.moveStates.marginP1
     const currentLocation = this.props.moveStates.p1Location
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
@@ -29,13 +36,20 @@ class PlayerOne extends Component {
     if(event.keyCode === 80) {
       this.props.punch(false, true, "player-1")
     }
+    if(event.keyCode === 83){
+      this.props.duck(false, true, "player-1")
+    }
+    if(event.keyCode === 87) {
+      console.log("jumpp");
+      this.props.jump(false, true, "player-1")
+    }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
       if(event.keyCode === 80) {
-              console.log("P2 lost HP through punch");
+        console.log("P2 lost HP through punch");
       }
       else if (event.keyCode === 75) {
         console.log("P2 lost HP through kick");
@@ -48,6 +62,8 @@ class PlayerOne extends Component {
  render () {
    const {standingMovP1} = this.props.moveStates
    const {punchMovP1} = this.props.moveStates
+   const {duckMovP1} = this.props.moveStates
+   const {jumpMovP1} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
@@ -87,11 +103,58 @@ class PlayerOne extends Component {
      </div>
    )
 
+   const duckMovementP1 = (
+         <div className="leftMargin">
+           <div style={leftMargin}>
+             <SpriteAnimator
+               ref='sprite'
+               width={46}
+               height={108}
+               sprite='../src/duckP1.svg'
+               shouldAnimate={duckMovP1}
+               fps={6}
+               startFrame={0}
+               stopLastFrame={true}
+               reset={!duckMovP1}
+             />
+           </div>
+         </div>
+       )
+
+       const jumpMovementP1 = (
+             <div className="leftMargin">
+               <div style={leftMargin}>
+                 <SpriteAnimator
+                   ref='sprite'
+                   width={85}
+                   height={108}
+                   sprite='../src/jumpP1.svg'
+                   shouldAnimate={jumpMovP1}
+                   fps={3}
+                   startFrame={0}
+                   stopLastFrame={true}
+                   reset={!jumpMovP1}
+                 />
+               </div>
+             </div>
+           )
+
+       const movementToRender = () => {
+         if(this.props.moveStates.duckMovP1){
+             return (duckMovementP1);
+         } else if (this.props.moveStates.punchMovP1){
+             return (punchMovementP1);
+         } else if (this.props.moveStates.jumpMovP1){
+             return (jumpMovementP1);
+         } else {
+             return (standingMovementP1);
+         }
+       };
 
    return (
     <div>
       <div className="container_p1">
-        {this.props.moveStates.punchMovP1 === true ? punchMovementP1 : standingMovementP1}
+        { movementToRender() }
       </div>
     </div>
    )

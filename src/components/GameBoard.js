@@ -15,6 +15,8 @@ class App extends Component {
       p2Location: 0,
       standingMovP1: true,
       punchMovP1: false,
+      duckMovP1: false,
+      jumpMovP1: false,
       standingMovP2: true,
       punchMovP2: false,
       duckMovP2: false
@@ -65,16 +67,31 @@ class App extends Component {
       })
     }
   }
-    duck(standingMov, duckMov, player) {
-      if(player === 'player-1'){
-        console.log("ha");
-      } else {
-        this.setState({
-          standingMovP2: standingMov,
-          duckMovP2: duckMov
-        })
-      }
+
+  duck(standingMov, duckMov, player) {
+    if(player === 'player-1'){
+      this.setState({
+        standingMovP1: standingMov,
+        duckMovP1: duckMov
+      })
+    } else {
+      this.setState({
+        standingMovP2: standingMov,
+        duckMovP2: duckMov
+      })
     }
+  }
+
+  jump(standingMov, jumpMov, player) {
+    if(player === 'player-1') {
+      this.setState({
+        standingMovP1: standingMov,
+        jumpMovP1: jumpMov
+      })
+    } else {
+      console.log("ufckyou")
+    }
+  }
 
   render() {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
@@ -83,6 +100,8 @@ class App extends Component {
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
+                                           duck={this.duck.bind(this)}
+                                           jump={this.jump.bind(this)}
         />
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
