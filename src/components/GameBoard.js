@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
