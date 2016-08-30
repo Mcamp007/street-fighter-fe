@@ -22,7 +22,6 @@ class PlayerOne extends Component {
     const test = this.props
     if(event.keyCode === 87) {
       setTimeout(function(){
-        console.log(test);
         test.jump(true, false, "player-1");
       }, 1200)
     }
@@ -49,7 +48,26 @@ class PlayerOne extends Component {
     if(event.keyCode === 87) {
       console.log("jumpp");
       this.props.jump(false, true, "player-1")
-      console.log(this.props.moveStates.marginBottomP1)
+
+    }
+    if(event.keyCode === 32){
+      console.log("haduken Location", this.props.moveStates.hadukenLocation);
+      this.props.hadukenMov(false, true,true, "player-1")
+          const self = this
+          if(this.props.moveStates.hadukenStartP1) {
+            const interval = setInterval(function() {
+              self.props.hadukenBall(10, 1, "player-1")
+              console.log(self.props.moveStates.hadukenLocation);
+
+              if (self.props.moveStates.hadukenLocation === 5){
+                console.log("fuck u");
+                clearInterval(interval)
+                self.props.hadukenMov(true, false,false, "player-1")
+                self.props.reset()
+              }
+            }, 70);
+          }
+
     }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
@@ -65,9 +83,12 @@ class PlayerOne extends Component {
     }
   }
 
-
+// componentDidMount(){
+//   console.log(this.props.moveStates.marginBottomP1)
+// }
 
  render () {
+
    const {standingMovP1} = this.props.moveStates
    const {punchMovP1} = this.props.moveStates
    const {duckMovP1} = this.props.moveStates
@@ -75,8 +96,9 @@ class PlayerOne extends Component {
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
-   const haduken = {
-    //  marginLeft: this.props.moveStates.
+   const hadukenBallMargin = {
+     marginLeft: this.props.moveStates.hadukenBallMarginP1 + 'vw'
+    //  backgroundColor: 'pink'
    }
 
    const standingMovementP1 = (
@@ -150,10 +172,9 @@ class PlayerOne extends Component {
         </div>
         )
 
-      const hadukenMovementP1= (
-        <div className="hadukenContainer">
-          <div style={haduken}></div>
-        </div>
+      const hadukenBallP1 = (
+          <div style={hadukenBallMargin}>H</div>
+
       )
 
        const movementToRender = () => {
@@ -163,8 +184,8 @@ class PlayerOne extends Component {
              return (punchMovementP1);
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
-         } else if (this.props.moveStates.hadukenP1){
-           return (hadukenMovementP1);
+         } else if (this.props.moveStates.hadukenStartP1){
+           return (hadukenBallP1);
          } else {
              return (standingMovementP1);
          }

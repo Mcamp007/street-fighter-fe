@@ -10,3 +10,9 @@
   bottom: 100px;
   position: absolute;
 }
+
+.hadukenContainer {
+  background-color: pink;
+    position: relative;
+  /*border-radius: solid black 1px;*/
+}

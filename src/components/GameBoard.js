@@ -18,6 +18,12 @@ class App extends Component {
       duckMovP1: false,
       jumpMovP1: false,
       openP1: false,
+      timer: false,
+      hadukenBallMarginP1: 0,
+      hadukenStartP1: false,
+      hadukenCollisionP1: false,
+      hadukenLocation: 0,
+      hadukenMovementP1: false,
       standingMovP2: true,
       punchMovP2: false,
       duckMovP2: false
@@ -94,6 +100,32 @@ class App extends Component {
     }
   }
 
+  hadukenMov(standingMov, hadukenMov, hadukenStart, player){
+    if(player === 'player-1'){
+      this.setState({
+        standingMovP1: standingMov,
+        hadukenMovementP1: hadukenMov,
+        hadukenStartP1: hadukenStart
+      })
+    }
+  }
+  hadukenBall(number, position,player) {
+    console.log("in gameboard", this.state.hadukenBallMarginP1,this.state.hadukenLocation);
+    if(player === 'player-1'){
+      this.setState({
+        hadukenBallMarginP1: this.state.hadukenBallMarginP1 + number,
+        hadukenLocation: this.state.hadukenLocation + position
+      })
+    }
+  }
+  reset (){
+    console.log("this is reset",this.state.hadukenBallMarginP1, this.state.hadukenLocation );
+    this.setState({
+      hadukenBallMarginP1: 0,
+      hadukenLocation: 0
+    })
+  }
+
   render() {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
@@ -103,6 +135,9 @@ class App extends Component {
                                            punch={this.punch.bind(this)}
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
+                                           hadukenMov={this.hadukenMov.bind(this)}
+                                           hadukenBall={this.hadukenBall.bind(this)}
+                                           reset={this.reset.bind(this)}
         />
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
