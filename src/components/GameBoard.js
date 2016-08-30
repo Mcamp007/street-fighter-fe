@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
+
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
 class App extends Component {
   constructor(props){

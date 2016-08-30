@@ -1,6 +1,7 @@
 .leftMargin {
   float: left;
-  position: absolute;
   /*background-color: black;*/
   /*border: solid pink 1px;*/
+  bottom: 20px;
+  position: absolute;
 }

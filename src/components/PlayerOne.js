@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator';
-import '../styling/PlayerOne.css'
+import '../styling/PlayerOne.css';
 
 class PlayerOne extends Component {
   constructor(props) {
@@ -18,12 +18,12 @@ class PlayerOne extends Component {
     if(event.keyCode === 83) {
       this.props.duck(true, false, "player-1")
     }
-
+    const test = this.props
     if(event.keyCode === 87) {
       setTimeout(function(){
-        this.props.jump(true, false, "player-1");
-      }, 3000)
-
+        console.log(test);
+        test.jump(true, false, "player-1");
+      }, 1200)
     }
   }
 
@@ -48,6 +48,7 @@ class PlayerOne extends Component {
     if(event.keyCode === 87) {
       console.log("jumpp");
       this.props.jump(false, true, "player-1")
+      console.log(this.props.moveStates.marginBottomP1)
     }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
@@ -128,22 +129,22 @@ class PlayerOne extends Component {
        )
 
        const jumpMovementP1 = (
-             <div className="leftMargin">
-               <div style={leftMargin}>
-                 <SpriteAnimator
-                   ref='sprite'
-                   width={85}
-                   height={108}
-                   sprite='../src/jumpP1.svg'
-                   shouldAnimate={jumpMovP1}
-                   fps={2}
-                   startFrame={0}
-                   stopLastFrame={true}
-                   reset={!jumpMovP1}
-                 />
-               </div>
-             </div>
-           )
+        <div className="leftMargin">
+          <div style={leftMargin}>
+            <SpriteAnimator
+              ref='sprite'
+              width={90}
+              height={108}
+              sprite='../src/jumpP1.svg'
+              shouldAnimate={jumpMovP1}
+              fps={3}
+              startFrame={0}
+              stopLastFrame={true}
+              reset={!jumpMovP1}
+            />
+          </div>
+        </div>
+        )
 
        const movementToRender = () => {
          if(this.props.moveStates.duckMovP1){
@@ -159,9 +160,7 @@ class PlayerOne extends Component {
 
    return (
     <div>
-      <div className="container_p1">
         { movementToRender() }
-      </div>
     </div>
    )
  }
