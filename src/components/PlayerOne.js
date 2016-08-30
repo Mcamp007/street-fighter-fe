@@ -75,6 +75,9 @@ class PlayerOne extends Component {
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
+   const haduken = {
+    //  marginLeft: this.props.moveStates.
+   }
 
    const standingMovementP1 = (
      <div className="leftMargin">
@@ -147,6 +150,12 @@ class PlayerOne extends Component {
         </div>
         )
 
+      const hadukenMovementP1= (
+        <div className="hadukenContainer">
+          <div style={haduken}></div>
+        </div>
+      )
+
        const movementToRender = () => {
          if(this.props.moveStates.duckMovP1){
              return (duckMovementP1);
@@ -154,6 +163,8 @@ class PlayerOne extends Component {
              return (punchMovementP1);
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
+         } else if (this.props.moveStates.hadukenP1){
+           return (hadukenMovementP1);
          } else {
              return (standingMovementP1);
          }
