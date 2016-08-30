@@ -18,6 +18,10 @@ class App extends Component {
       duckMovP1: false,
       jumpMovP1: false,
       hadoukenMovP1: false,
+      hadoukenBallP1: false,
+      hadoukenBallPosP1: 0,
+      hadoukenBallMarginP1: 0,
+      ballVisibility: "hidden",
       standingMovP2: true,
       punchMovP2: false,
       duckMovP2: false
@@ -29,6 +33,7 @@ class App extends Component {
       })
       // this.setState({standingMov: true})
    }
+
   moveForward(number, position, player) {
     if(player === "player-1") {
     this.setState({
@@ -51,7 +56,7 @@ class App extends Component {
     } else {
       this.setState({
         marginP2: this.state.marginP2 - number,
-        p2Location: this.state.p2Location + position
+        p2Location: this.state.p2Location + position,
       })
     }
   }
@@ -94,14 +99,32 @@ class App extends Component {
     }
   }
 
-  hadouken(standingMov, hadoukenMov, player) {
+  hadouken(standingMov, hadoukenMov, hadoukenBall, ballVisibility, ballMargin, player) {
     if(player === 'player-1') {
       console.log("hadouken")
       this.setState({
         standingMovP1: standingMov,
-        hadoukenMovP1: hadoukenMov
+        hadoukenMovP1: hadoukenMov,
+        hadoukenBallP1: hadoukenBall,
+        ballVisibility: ballVisibility,
+        hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + ballMargin,
+        hadoukenBallPosP1: this.state.hadoukenBallPosP1 + 1
       })
     }
+  }
+
+  ballMove(number) {
+    this.setState({
+      hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + 10,
+      hadoukenBallPosP1: this.state.hadoukenBallPosP1 + number
+    })
+  }
+
+  reset() {
+    this.setState({
+      hadoukenBallMarginP1: 0,
+      hadoukenBallPosP1: this.state.p1Location
+    })
   }
 
   render() {
@@ -114,6 +137,8 @@ class App extends Component {
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
                                            hadouken={this.hadouken.bind(this)}
+                                           ballMove={this.ballMove.bind(this)}
+                                           reset={this.reset.bind(this)}
         />
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}

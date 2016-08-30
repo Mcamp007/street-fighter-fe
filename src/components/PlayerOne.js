@@ -29,7 +29,7 @@ class PlayerOne extends Component {
     const test2 = this.props
     if(event.keyCode === 71) {
       setTimeout(function() {
-        test2.hadouken(true, false, "player-1")
+        test2.hadouken(true, false, true, "visible", 0, "player-1")
       }, 1200)
     }
   }
@@ -58,7 +58,14 @@ class PlayerOne extends Component {
       console.log(this.props.moveStates.marginBottomP1)
     }
     if(event.keyCode === 71) {
-      this.props.hadouken(false, true, "player-1")
+      this.props.hadouken(false, true, true, "visible", 10,  "player-1")
+      const self = this
+      const interval = setInterval(function() { self.props.ballMove(1); console.log("positions", self.props.moveStates.hadoukenBallPosP1, self.props.moveStates.p2Location)
+      if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location) {
+        clearInterval(interval);
+        self.props.hadouken(true, false, true, "hidden", 0, "player-1")
+        self.props.reset()
+      }}, 300)
     }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
@@ -74,8 +81,6 @@ class PlayerOne extends Component {
     }
   }
 
-
-
  render () {
    const {standingMovP1} = this.props.moveStates
    const {punchMovP1} = this.props.moveStates
@@ -85,8 +90,10 @@ class PlayerOne extends Component {
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
-   const haduken = {
-    //  marginLeft: this.props.moveStates.
+
+   const ballMargin = {
+     marginLeft: this.props.moveStates.hadoukenBallMarginP1 + 'vw',
+     visibility: this.props.moveStates.ballVisibility
    }
 
    const standingMovementP1 = (
@@ -166,13 +173,31 @@ class PlayerOne extends Component {
             <SpriteAnimator
               ref='sprite'
               width={90}
-              height={108}
+              height={100}
               sprite='../src/hadukenMovP1.svg'
               shouldAnimate={hadoukenMovP1}
-              fps={10}
+              fps={15}
               startFrame={0}
               stopLastFrame={true}
               reset={!hadoukenMovP1}
+            />
+          </div>
+        </div>
+      )
+
+      const hadoukenBallP1 =(
+        <div >
+          <div style={ballMargin}>
+            <SpriteAnimator
+              ref='sprite'
+              width={90}
+              height={35}
+              sprite='../src/hadukenStart.svg'
+              shouldAnimate={hadoukenBallP1}
+              fps={15}
+              startFrame={0}
+              stopLastFrame={true}
+              reset={!hadoukenBallP1}
             />
           </div>
         </div>
@@ -195,6 +220,7 @@ class PlayerOne extends Component {
    return (
     <div>
         { movementToRender() }
+        { hadoukenBallP1 }
     </div>
    )
  }
