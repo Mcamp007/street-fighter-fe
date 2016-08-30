@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
+import '../styling/GameBoard.css';
 
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
 class App extends Component {
@@ -107,22 +108,22 @@ class App extends Component {
         hadoukenMovP1: hadoukenMov,
         hadoukenBallP1: hadoukenBall,
         ballVisibility: ballVisibility,
-        hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + ballMargin,
-        hadoukenBallPosP1: this.state.hadoukenBallPosP1 + 1
+        hadoukenBallMarginP1: this.state.marginP1,
+        hadoukenBallPosP1: this.state.p1Location
       })
     }
   }
 
   ballMove(number) {
     this.setState({
-      hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + 10,
+      hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + 14.8,
       hadoukenBallPosP1: this.state.hadoukenBallPosP1 + number
     })
   }
 
   reset() {
     this.setState({
-      hadoukenBallMarginP1: 0,
+      hadoukenBallMarginP1: this.state.marginP1,
       hadoukenBallPosP1: this.state.p1Location
     })
   }
@@ -131,6 +132,7 @@ class App extends Component {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
       <div>
+      {/*<img src="../src/background.gif" className="gameboard-bg"></img>*/}  
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}

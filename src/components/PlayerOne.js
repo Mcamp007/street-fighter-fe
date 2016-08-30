@@ -58,14 +58,14 @@ class PlayerOne extends Component {
       console.log(this.props.moveStates.marginBottomP1)
     }
     if(event.keyCode === 71) {
-      this.props.hadouken(false, true, true, "visible", 10,  "player-1")
+      this.props.hadouken(false, true, true, "visible", 14.8,  "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1); console.log("positions", self.props.moveStates.hadoukenBallPosP1, self.props.moveStates.p2Location)
       if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location) {
         clearInterval(interval);
         self.props.hadouken(true, false, true, "hidden", 0, "player-1")
         self.props.reset()
-      }}, 300)
+      }}, 100)
     }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
@@ -186,7 +186,7 @@ class PlayerOne extends Component {
       )
 
       const hadoukenBallP1 =(
-        <div >
+        <div className="leftMargin">
           <div style={ballMargin}>
             <SpriteAnimator
               ref='sprite'
@@ -211,7 +211,7 @@ class PlayerOne extends Component {
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
          } else if (this.props.moveStates.hadoukenMovP1){
-           return (hadukenMovementP1);
+           return (<div>{hadukenMovementP1}, {hadoukenBallP1}</div>);
          } else {
              return (standingMovementP1);
          }
@@ -220,7 +220,6 @@ class PlayerOne extends Component {
    return (
     <div>
         { movementToRender() }
-        { hadoukenBallP1 }
     </div>
    )
  }
