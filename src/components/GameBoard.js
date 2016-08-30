@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
+import { Motion, spring } from 'react-motion';
 
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
       punchMovP1: false,
       duckMovP1: false,
       jumpMovP1: false,
+      openP1: false,
       standingMovP2: true,
       punchMovP2: false,
       duckMovP2: false

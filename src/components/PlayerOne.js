@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator';
 import '../styling/PlayerOne.css';
 
+
 class PlayerOne extends Component {
   constructor(props) {
     super(props);
@@ -129,7 +130,7 @@ class PlayerOne extends Component {
        )
 
        const jumpMovementP1 = (
-        <div className="leftMargin">
+         <div className="bottomMargin">
           <div style={leftMargin}>
             <SpriteAnimator
               ref='sprite'
