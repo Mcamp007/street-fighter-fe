@@ -17,7 +17,7 @@ class App extends Component {
       punchMovP1: false,
       duckMovP1: false,
       jumpMovP1: false,
-      openP1: false,
+      hadoukenMovP1: false,
       standingMovP2: true,
       punchMovP2: false,
       duckMovP2: false
@@ -94,6 +94,16 @@ class App extends Component {
     }
   }
 
+  hadouken(standingMov, hadoukenMov, player) {
+    if(player === 'player-1') {
+      console.log("hadouken")
+      this.setState({
+        standingMovP1: standingMov,
+        hadoukenMovP1: hadoukenMov
+      })
+    }
+  }
+
   render() {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
@@ -103,6 +113,7 @@ class App extends Component {
                                            punch={this.punch.bind(this)}
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
+                                           hadouken={this.hadouken.bind(this)}
         />
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}

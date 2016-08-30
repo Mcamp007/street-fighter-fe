@@ -26,6 +26,12 @@ class PlayerOne extends Component {
         test.jump(true, false, "player-1");
       }, 1200)
     }
+    const test2 = this.props
+    if(event.keyCode === 71) {
+      setTimeout(function() {
+        test2.hadouken(true, false, "player-1")
+      }, 1200)
+    }
   }
 
 
@@ -51,6 +57,9 @@ class PlayerOne extends Component {
       this.props.jump(false, true, "player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
+    if(event.keyCode === 71) {
+      this.props.hadouken(false, true, "player-1")
+    }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
 
@@ -72,6 +81,7 @@ class PlayerOne extends Component {
    const {punchMovP1} = this.props.moveStates
    const {duckMovP1} = this.props.moveStates
    const {jumpMovP1} = this.props.moveStates
+   const {hadoukenMovP1} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
@@ -151,8 +161,20 @@ class PlayerOne extends Component {
         )
 
       const hadukenMovementP1= (
-        <div className="hadukenContainer">
-          <div style={haduken}></div>
+        <div className="leftMargin">
+          <div style={leftMargin}>
+            <SpriteAnimator
+              ref='sprite'
+              width={90}
+              height={108}
+              sprite='../src/hadukenMovP1.svg'
+              shouldAnimate={hadoukenMovP1}
+              fps={10}
+              startFrame={0}
+              stopLastFrame={true}
+              reset={!hadoukenMovP1}
+            />
+          </div>
         </div>
       )
 
@@ -163,7 +185,7 @@ class PlayerOne extends Component {
              return (punchMovementP1);
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
-         } else if (this.props.moveStates.hadukenP1){
+         } else if (this.props.moveStates.hadoukenMovP1){
            return (hadukenMovementP1);
          } else {
              return (standingMovementP1);
