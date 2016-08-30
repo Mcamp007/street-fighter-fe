@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       marginP1: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7],
+      locationArr: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
       p1Location: 0,
       p2Location: 0,
       standingMovP1: true,
@@ -18,7 +18,6 @@ class App extends Component {
       duckMovP1: false,
       jumpMovP1: false,
       openP1: false,
-      timer: false,
       hadukenBallMarginP1: 0,
       hadukenStartP1: false,
       hadukenCollisionP1: false,
@@ -28,7 +27,9 @@ class App extends Component {
       punchMovP2: false,
       duckMovP2: false
     }
+    this.set
   }
+
   componentDidMount() {
       this.setState({p1Location: this.state.locationArr[0],
                     p2Location: this.state.locationArr[this.state.locationArr.length - 1]
@@ -105,7 +106,10 @@ class App extends Component {
       this.setState({
         standingMovP1: standingMov,
         hadukenMovementP1: hadukenMov,
-        hadukenStartP1: hadukenStart
+        hadukenStartP1: hadukenStart,
+        hadukenLocation: this.state.p1Location,
+        hadukenBallMarginP1: this.state.marginP1
+
       })
     }
   }
@@ -121,8 +125,8 @@ class App extends Component {
   reset (){
     console.log("this is reset",this.state.hadukenBallMarginP1, this.state.hadukenLocation );
     this.setState({
-      hadukenBallMarginP1: 0,
-      hadukenLocation: 0
+      hadukenLocation: this.state.p1Location,
+      hadukenBallMarginP1: this.state.marginP1
     })
   }
 
