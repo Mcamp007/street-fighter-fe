@@ -31,8 +31,6 @@ class PlayerOne extends Component {
     }
   }
 
-
-
   movement() {
     // console.log(event);
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
@@ -56,17 +54,25 @@ class PlayerOne extends Component {
       this.props.hadouken(false, true, true, "visible", 14.8,  "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1);
-      if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location && self.props.moveStates.jumpMovP2 != true) {
-        console.log("player lost hp through hatoken");
-        clearInterval(interval);
-        self.props.hadouken(true, false, true, "hidden", 0, "player-1")
-        self.props.reset()
-        }}, 100)
+      if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location) {
+        // console.log("ball locartion", self.props.moveStates.hadoukenBallPosP1);
+        if(self.props.moveStates.jumpMovP2){
+          console.log("save");
+          clearInterval(interval)
+        }
+        else {
+          console.log("player lost hp through hatoken");
+          clearInterval(interval);
+          self.props.hadouken(true, false, false, "hidden", 0, "player-1")
+          self.props.reset()
+        }}}, 100)
+
+
       console.log(this.props.moveStates.hadoukenBallPosP1, this.props.moveStates.p2Location)
-      if (self.props.moveStates.hadoukenBallP1 + 1 === self.props.moveStates.p2Location && elf.props.moveStates.jumpMovP2) {
-        console.log("Safe")
-      }
-    }
+      // if (self.props.moveStates.hadoukenBallP1 + 1 === self.props.moveStates.p2Location && elf.props.moveStates.jumpMovP2) {
+      //   console.log("Safe")
+      // }
+  }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
 
