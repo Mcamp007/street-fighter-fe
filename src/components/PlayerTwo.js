@@ -4,9 +4,6 @@ import '../styling/PlayerTwo.css'
 
 
 class PlayerTwo extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount (){
     window.addEventListener('keyup', this.handleStop.bind(this, event), false)
     window.addEventListener('keydown', this.movement.bind(this, event), false)
@@ -20,6 +17,15 @@ class PlayerTwo extends Component {
     }
     if(event.keyCode === 40) {
       this.props.duck(true, false, "player-2")
+    }
+    if(event.keyCode === 38) {
+      this.props.jump(true, false, "player-2")
+    }
+    if(event.keyCode === 38) {
+      const self = this
+      setTimeout(function(){
+        self.props.jump(true, false, 0, "player-2");
+      }, 1200)
     }
   }
 
@@ -37,6 +43,9 @@ class PlayerTwo extends Component {
     if(event.keyCode === 40){
       this.props.duck(false, true, "player-2")
     }
+    if(event.keyCode === 38) {
+      this.props.jump(false, true, 10, "player-2")
+    }
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
@@ -51,9 +60,16 @@ class PlayerTwo extends Component {
     const {standingMovP2} = this.props.moveStates
     const {punchMovP2} = this.props.moveStates
     const {duckMovP2} = this.props.moveStates
+    const {jumpMovP2} = this.props.moveStates
     const rightMargin = {
       marginRight: this.props.moveStates.marginP2 + 'vw'
       };
+
+    const marginBottom = {
+      marginBottom: this.props.moveStates.marginBottomP2 + 'vw',
+      marginRight: this.props.moveStates.marginP2 + 'vw'
+    }
+
     const standingMovementP2 = (
       <div className="rightMargin">
         <div style={rightMargin}>
@@ -106,11 +122,31 @@ class PlayerTwo extends Component {
           </div>
         )
 
+        const jumpMovementP2 = (
+          <div className="rightMargin">
+           <div style={marginBottom}>
+             <SpriteAnimator
+               ref='sprite'
+               width={90}
+               height={108}
+               sprite='../src/jumpP1.svg'
+               shouldAnimate={jumpMovP2}
+               fps={3}
+               startFrame={0}
+               stopLastFrame={true}
+               reset={!jumpMovP2}
+             />
+           </div>
+         </div>
+         )
+
     const movementToRender = () => {
       if(this.props.moveStates.duckMovP2){
           return (duckMovementP2);
       } else if (this.props.moveStates.punchMovP2){
           return (punchMovementP2);
+      } else if (this.props.moveStates.jumpMovP2){
+          return (jumpMovementP2);
       } else {
           return (standingMovementP2);
       }

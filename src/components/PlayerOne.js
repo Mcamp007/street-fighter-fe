@@ -4,9 +4,6 @@ import '../styling/PlayerOne.css';
 
 
 class PlayerOne extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount (){
     window.addEventListener('keyup', this.handleStop.bind(this, event), false)
     window.addEventListener('keydown', this.movement.bind(this, event), false)
@@ -23,7 +20,7 @@ class PlayerOne extends Component {
     if(event.keyCode === 87) {
       setTimeout(function(){
         console.log(test);
-        test.jump(true, false, "player-1");
+        test.jump(true, false,0, "player-1");
       }, 1200)
     }
     const test2 = this.props
@@ -38,8 +35,6 @@ class PlayerOne extends Component {
 
   movement() {
     // console.log(event);
-    const currentMargin = this.props.moveStates.marginP1
-    const currentLocation = this.props.moveStates.p1Location
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
       this.props.moveForward(14.8, 1, "player-1");
     }
@@ -54,18 +49,23 @@ class PlayerOne extends Component {
     }
     if(event.keyCode === 87) {
       console.log("jumpp");
-      this.props.jump(false, true, "player-1")
+      this.props.jump(false, true, 10,"player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
     if(event.keyCode === 71) {
       this.props.hadouken(false, true, true, "visible", 14.8,  "player-1")
       const self = this
-      const interval = setInterval(function() { self.props.ballMove(1); console.log("positions", self.props.moveStates.hadoukenBallPosP1, self.props.moveStates.p2Location)
-      if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location) {
+      const interval = setInterval(function() { self.props.ballMove(1);
+      if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location && self.props.moveStates.jumpMovP2 != true) {
+        console.log("player lost hp through hatoken");
         clearInterval(interval);
         self.props.hadouken(true, false, true, "hidden", 0, "player-1")
         self.props.reset()
-      }}, 100)
+        }}, 100)
+      console.log(this.props.moveStates.hadoukenBallPosP1, this.props.moveStates.p2Location)
+      if (self.props.moveStates.hadoukenBallP1 + 1 === self.props.moveStates.p2Location && elf.props.moveStates.jumpMovP2) {
+        console.log("Safe")
+      }
     }
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
@@ -79,6 +79,8 @@ class PlayerOne extends Component {
         console.log("P2 lost HP through kick");
       }
     }
+
+
   }
 
  render () {
@@ -87,6 +89,7 @@ class PlayerOne extends Component {
    const {duckMovP1} = this.props.moveStates
    const {jumpMovP1} = this.props.moveStates
    const {hadoukenMovP1} = this.props.moveStates
+   const {hadoukenBallP1} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
@@ -94,6 +97,11 @@ class PlayerOne extends Component {
    const ballMargin = {
      marginLeft: this.props.moveStates.hadoukenBallMarginP1 + 'vw',
      visibility: this.props.moveStates.ballVisibility
+   }
+
+   const marginBottom = {
+     marginBottom: this.props.moveStates.marginBottomP1 + 'vw',
+     marginLeft: this.props.moveStates.marginP1 + 'vw'
    }
 
    const standingMovementP1 = (
@@ -150,8 +158,8 @@ class PlayerOne extends Component {
        )
 
        const jumpMovementP1 = (
-         <div className="bottomMargin">
-          <div style={leftMargin}>
+         <div className="leftMargin">
+          <div style={marginBottom}>
             <SpriteAnimator
               ref='sprite'
               width={90}
@@ -185,7 +193,7 @@ class PlayerOne extends Component {
         </div>
       )
 
-      const hadoukenBallP1 =(
+      const hadoukenBallerP1 =(
         <div className="leftMargin">
           <div style={ballMargin}>
             <SpriteAnimator
@@ -211,7 +219,7 @@ class PlayerOne extends Component {
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
          } else if (this.props.moveStates.hadoukenMovP1){
-           return (<div>{hadukenMovementP1}, {hadoukenBallP1}</div>);
+           return (<div>{hadukenMovementP1}, {hadoukenBallerP1}</div>);
          } else {
              return (standingMovementP1);
          }

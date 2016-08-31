@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
 import '../styling/GameBoard.css';
@@ -25,7 +24,10 @@ class App extends Component {
       ballVisibility: "hidden",
       standingMovP2: true,
       punchMovP2: false,
-      duckMovP2: false
+      duckMovP2: false,
+      jumpMovP2: false,
+      marginBottomP1: 0,
+      marginBottomP2: 0
     }
   }
   componentDidMount() {
@@ -89,14 +91,20 @@ class App extends Component {
     }
   }
 
-  jump(standingMov, jumpMov, player) {
+  jump(standingMov, jumpMov, marginB, player) {
     if(player === 'player-1') {
       this.setState({
         standingMovP1: standingMov,
-        jumpMovP1: jumpMov
+        jumpMovP1: jumpMov,
+        marginBottomP1: marginB
       })
-    } else {
-      console.log("ufckyou")
+    } else if(player === 'player-2') {
+      this.setState({
+        standingMovP2: standingMov,
+        jumpMovP2: jumpMov,
+        marginBottomP2: marginB
+      })
+
     }
   }
 
@@ -132,7 +140,7 @@ class App extends Component {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
       <div>
-      {/*<img src="../src/background.gif" className="gameboard-bg"></img>*/}  
+      {/*<img src="../src/background.gif" className="gameboard-bg"></img>*/}
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
@@ -146,10 +154,10 @@ class App extends Component {
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
                                            duck={this.duck.bind(this)}
+                                           jump={this.jump.bind(this)}
         />
       </div>
     );
   }
 }
 export default App;
-{/*window.removeEventListener('resize', this.handleResize);*/}
