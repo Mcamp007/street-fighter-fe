@@ -32,14 +32,17 @@ class GameBoard extends Component {
       playerTwoHP: 100,
       marginBottomP1: 0,
       marginBottomP2: 0,
-      hadoukenAllowance: true
+      hadoukenAllowance: true,
+      blockMovP1: false,
+      blockMovP2: false,
+      blockAllowanceP1: true,
+      blockAllowanceP2: true
     }
   }
   componentDidMount() {
       this.setState({p1Location: this.state.locationArr[0],
                     p2Location: this.state.locationArr[this.state.locationArr.length - 1]
       })
-      // this.setState({standingMov: true})
    }
 
   moveForward(number, position, player) {
@@ -116,7 +119,7 @@ class GameBoard extends Component {
     }
   }
 
-  hadouken(standingMov, hadoukenMov, hadoukenBall, ballVisibility, ballMargin, player) {
+  hadouken(standingMov, hadoukenMov, hadoukenBall, ballVisibility, ballMargin, hadoukenAllowance, damage, player) {
     if(player === 'player-1') {
       console.log("hadouken")
       this.setState({
@@ -124,8 +127,25 @@ class GameBoard extends Component {
         hadoukenMovP1: hadoukenMov,
         hadoukenBallP1: hadoukenBall,
         ballVisibility: ballVisibility,
+        hadoukenAllowance: hadoukenAllowance,
         hadoukenBallMarginP1: this.state.marginP1,
-        hadoukenBallPosP1: this.state.p1Location
+        hadoukenBallPosP1: this.state.p1Location,
+        playerTwoHP: this.state.playerTwoHP - damage
+      })
+    }
+  }
+
+  block(blockMov,player) {
+    if(player === 'player-1') {
+      console.log(blockMov);
+      this.setState({
+        blockMovP1: blockMov,
+        blockAllowanceP1: true
+      })
+    } else {
+      this.setState({
+        blockMovP2: blockMov,
+        blockAllowanceP2: true
       })
     }
   }
@@ -141,19 +161,24 @@ class GameBoard extends Component {
     if(identifier === 'hadoukenBall') {
     this.setState({
       hadoukenBallMarginP1: this.state.marginP1,
-      hadoukenBallPosP1: this.state.p1Location
+      hadoukenBallPosP1: this.state.p1Location,
+      ballVisibility: "hidden"
     })
-  } else {
-    this.setState({
-      hadoukenAllowance: false
-    })
-    const self = this
-    setInterval(function() {
-      self.setState({
+    } else if (identifier === 'hadoukenAllowance'){
+      this.setState({
         hadoukenAllowance: true
       })
-    }, 3000)
-  }
+    } else if (identifier === 'blockAllowanceP1') {
+      this.setState({
+        blockAllowanceP1: true,
+        blockMovP1: false
+      })
+    } else if (identifier === 'blockAllowanceP2') {
+      this.setState({
+        blockAllowanceP2: true,
+        blockMovP2: false
+      })
+    }
   }
 
   render() {
@@ -169,12 +194,15 @@ class GameBoard extends Component {
                                            hadouken={this.hadouken.bind(this)}
                                            ballMove={this.ballMove.bind(this)}
                                            reset={this.reset.bind(this)}
+                                           block={this.block.bind(this)}
         />
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
+                                           block={this.block.bind(this)}
+                                           reset={this.reset.bind(this)}
         />
       <HPOne healthbar={this.state.playerOneHP}/>
       <HPTwo healthbar={this.state.playerTwoHP}/>

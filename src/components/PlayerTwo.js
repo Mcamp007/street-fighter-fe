@@ -26,6 +26,9 @@ class PlayerTwo extends Component {
         self.props.jump(true, false, 0, "player-2");
       }, 1200)
     }
+    if(event.keyCode === 18) {
+      this.props.block(false, "player-2")
+    }
   }
 
   movement() {
@@ -44,6 +47,13 @@ class PlayerTwo extends Component {
     }
     if(event.keyCode === 38) {
       this.props.jump(false, true, 10, "player-2")
+    }
+    if(event.keyCode === 18 && this.props.moveStates.blockAllowanceP2) {
+      this.props.block(true, "player-2")
+      const self2 = this
+      setTimeout(function() {
+        self2.props.reset("blockAllowanceP2")
+      }, 2000)
     }
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
@@ -146,6 +156,8 @@ class PlayerTwo extends Component {
           return (punchMovementP2);
       } else if (this.props.moveStates.jumpMovP2){
           return (jumpMovementP2);
+      } else if (this.props.moveStates.blockMovP2) {
+        return (<div className="block-containerP2">{standingMovementP2}</div>)
       } else {
           return (standingMovementP2);
       }

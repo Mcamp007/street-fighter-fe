@@ -29,6 +29,9 @@ class PlayerOne extends Component {
         test2.hadouken(true, false, true, "visible", 0, "player-1")
       }, 1200)
     }
+    if(event.keyCode === 16) {
+      this.props.block(false, "player-1")
+    }
   }
 
   movement() {
@@ -50,8 +53,15 @@ class PlayerOne extends Component {
       this.props.jump(false, true, 10,"player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
+    if(event.keyCode === 16 && this.props.moveStates.blockAllowanceP1) {
+      this.props.block(true, "player-1")
+      const self = this
+      setTimeout(function() {
+        self.props.reset("blockAllowanceP1")
+      }, 2000)
+    }
     if(event.keyCode === 71 && this.props.moveStates.hadoukenAllowance) {
-      this.props.hadouken(false, true, true, "visible", 14.8,  "player-1")
+      this.props.hadouken(false, true, true, "visible", 14.8, false, 0, "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1);
       if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location) {
@@ -59,14 +69,21 @@ class PlayerOne extends Component {
         if(self.props.moveStates.jumpMovP2){
           console.log("save");
           clearInterval(interval)
+          self.props.hadouken(true, false, false, "hidden", 14.8, false, 0, "player-1")
+          self.props.reset('hadoukenBall');
         }
         else {
           console.log("player lost hp through hatoken");
           clearInterval(interval);
-          self.props.hadouken(true, false, false, "hidden", 0, "player-1")
+          self.props.hadouken(true, false, false, "hidden", 0, false, 10, "player-1")
           self.props.reset('hadoukenBall')
         }}}, 120)
-        this.props.reset('hadoukenAllowance')
+
+        const self2 = this
+        setTimeout(function (){
+          self2.props.reset('hadoukenAllowance')
+        }, 2000)
+
   }
 
 
@@ -82,8 +99,6 @@ class PlayerOne extends Component {
         console.log("P2 lost HP through kick");
       }
     }
-
-
   }
 
  render () {
@@ -119,7 +134,7 @@ class PlayerOne extends Component {
            fps={6}
            startFrame={0}
            stopLastFrame={false}
-           reset={!standingMovP1}
+           reset={standingMovP1}
          />
        </div>
      </div>
@@ -222,7 +237,9 @@ class PlayerOne extends Component {
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
          } else if (this.props.moveStates.hadoukenMovP1){
-           return (<div>{hadukenMovementP1}, {hadoukenBallerP1}</div>);
+           return (<div>{hadukenMovementP1} {hadoukenBallerP1}</div>);
+         } else if (this.props.moveStates.blockMovP1) {
+           return (<div className="block-containerP1">{standingMovementP1}</div>)
          } else {
              return (standingMovementP1);
          }
