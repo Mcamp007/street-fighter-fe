@@ -9,18 +9,22 @@ class PlayerOne extends Component {
     window.addEventListener('keydown', this.movement.bind(this, event), false)
   }
   handleStop() {
-    // console.log(event);
+    console.log(event);
     if(event.keyCode === 80) {
       this.props.punch(true, false, "player-1")
     }
     if(event.keyCode === 83) {
       this.props.duck(true, false, "player-1")
+      if(this.props.moveStates.jumpMovP1){
+        clearInterval(this.interval)
+        this.props.jump(true, false, "player-1");
+      }
     }
     const test = this.props
     if(event.keyCode === 87) {
-      setTimeout(function(){
+      const interval = setTimeout(function(){
         test.jump(true, false, "player-1");
-      }, 1200)
+      }, 1500)
     }
     if(event.keyCode === 93){
       this.props.block(false, "player-1")
@@ -31,7 +35,7 @@ class PlayerOne extends Component {
 
   movement() {
     console.log(event);
-event.preventDefault()
+// event.preventDefault()
 
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
       this.props.moveForward(7.4, 1, "player-1");
@@ -74,7 +78,7 @@ event.preventDefault()
         }, 100);
       }
       const self2 = this
-      const intervalReset = setTimeout(function() {
+      setTimeout(function() {
         self2.props.reset('hadukenAllowance');
       },2000)
 
