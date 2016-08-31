@@ -11,7 +11,7 @@ class PlayerOne extends Component {
   handleStop() {
     // console.log(event);
     if(event.keyCode === 80) {
-      this.props.punch(true, false, "player-1")
+      this.props.punch(true, false, 0, "player-1")
     }
     if(event.keyCode === 83) {
       this.props.duck(true, false, "player-1")
@@ -40,7 +40,7 @@ class PlayerOne extends Component {
       this.props.moveBackward(14.8, 1, "player-1")
     }
     if(event.keyCode === 80) {
-      this.props.punch(false, true, "player-1")
+      this.props.punch(false, true, 0, "player-1")
     }
     if(event.keyCode === 83){
       this.props.duck(false, true, "player-1")
@@ -76,6 +76,7 @@ class PlayerOne extends Component {
           // console.log("can loose hp");
       if(event.keyCode === 80) {
         console.log("P2 lost HP through punch");
+        this.props.punch(false, true, 5, "player-1")
       }
       else if (event.keyCode === 75) {
         console.log("P2 lost HP through kick");

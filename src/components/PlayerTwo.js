@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import SpriteAnimator from 'react-sprite-animator';
-import '../styling/PlayerTwo.css'
-
+import '../styling/PlayerTwo.css';
 
 class PlayerTwo extends Component {
   componentDidMount (){
@@ -13,7 +12,7 @@ class PlayerTwo extends Component {
   handleStop() {
     // console.log(event);
     if(event.keyCode === 16) {
-      this.props.punch(true, false, "player-2")
+      this.props.punch(true, false, 0, "player-2")
     }
     if(event.keyCode === 40) {
       this.props.duck(true, false, "player-2")
@@ -38,7 +37,7 @@ class PlayerTwo extends Component {
       this.props.moveBackward(14.8, 1, "player-2")
     }
     if(event.keyCode === 16) {
-      this.props.punch(false, true, "player-2")
+      this.props.punch(false, true, 0, "player-2")
     }
     if(event.keyCode === 40){
       this.props.duck(false, true, "player-2")
@@ -51,10 +50,10 @@ class PlayerTwo extends Component {
           // console.log("can loose hp");
       if(event.keyCode === 16) {
               console.log("P1 lost HP through punch");
+              this.props.punch(false, true, 5, "player-2");
       }
     }
   }
-
 
   render() {
     const {standingMovP2} = this.props.moveStates

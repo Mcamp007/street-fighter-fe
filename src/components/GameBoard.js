@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
 import '../styling/GameBoard.css';
+import HPOne from './HPOne';
+import HPTwo from './HPTwo';
 
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
-class App extends Component {
+class GameBoard extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -22,10 +24,12 @@ class App extends Component {
       hadoukenBallPosP1: 0,
       hadoukenBallMarginP1: 0,
       ballVisibility: "hidden",
+      playerOneHP: 100,
       standingMovP2: true,
       punchMovP2: false,
       duckMovP2: false,
       jumpMovP2: false,
+      playerTwoHP: 100,
       marginBottomP1: 0,
       marginBottomP2: 0,
       hadoukenAllowance: true
@@ -64,17 +68,20 @@ class App extends Component {
       })
     }
   }
-  punch(standingMov, punchMov, player) {
+  punch(standingMov, punchMov, damage, player) {
     if(player === "player-1") {
       this.setState({
         standingMovP1: standingMov,
-        punchMovP1: punchMov
+        punchMovP1: punchMov,
+        playerTwoHP: this.state.playerTwoHP - damage
       })
     } else {
       this.setState({
         standingMovP2: standingMov,
-        punchMovP2: punchMov
+        punchMovP2: punchMov,
+        playerOneHP: this.state.playerOneHP - damage
       })
+      console.log(this.state.playerOneHP)
     }
   }
 
@@ -141,7 +148,7 @@ class App extends Component {
       hadoukenAllowance: false
     })
     const self = this
-    const intervalReset = setInterval(function() {
+    setInterval(function() {
       self.setState({
         hadoukenAllowance: true
       })
@@ -169,8 +176,10 @@ class App extends Component {
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
         />
+      <HPOne healthbar={this.state.playerOneHP}/>
+      <HPTwo healthbar={this.state.playerTwoHP}/>
       </div>
     );
   }
 }
-export default App;
+export default GameBoard;
