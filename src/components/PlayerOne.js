@@ -13,7 +13,7 @@ class PlayerOne extends Component {
     if(event.code === "ShiftLeft") {
       this.props.punch(true, false, 0, "player-1")
     }
-    if(event.keyCode === 27) {
+    if(event.code === "AltLeft") {
       console.log('stop');
         this.props.kick(true, false, 0, "player-1")
     }
@@ -49,7 +49,7 @@ class PlayerOne extends Component {
     if(event.code === "ShiftLeft") {
       this.props.punch(false, true, 0, "player-1")
     }
-    if(event.keyCode === 27) {
+    if(event.code === "AltLeft") {
       console.log("P1 Kick")
       this.props.kick(false, true, 0, "player-1")
     }
@@ -106,9 +106,11 @@ class PlayerOne extends Component {
       } else if (event.code === "ShiftLeft" && this.props.moveStates.blockMovP2) {
         console.log("no damage to P2")
         this.props.punch(false, true, 2.5, "player-1")
-      }
-      else if (event.keyCode === 75) {
+      } else if (event.code === "AltLeft" && this.props.moveStates.blockMovP2 === false) {
         console.log("P2 lost HP through kick");
+        this.props.kick(false, true, 7, "player-1")
+      } else if (event.code === "AltLeft" && this.props.moveStates.blockMovP2) {
+        this.props.kick(false, true, 3.5, "player-1")
       }
     }
   }

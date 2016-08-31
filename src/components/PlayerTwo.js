@@ -73,6 +73,10 @@ class PlayerTwo extends Component {
         this.props.punch(false, true, 5, "player-2");
       } else if (event.code === "AltRight" && this.props.moveStates.blockMovP1) {
         this.props.punch(false, true, 2.5, "player-2")
+      } else if (event.code === "MetaRight" && this.props.moveStates.blockMovP1 === false) {
+        this.props.kick(false, true, 7, "player-2")
+      } else if (event.code === "MetaRight" && this.props.moveStates.blockMovP1) {
+        this.props.kick(false, true, 3.5, "player-2")
       }
     }
   }
