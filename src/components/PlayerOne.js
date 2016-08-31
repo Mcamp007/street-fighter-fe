@@ -10,7 +10,7 @@ class PlayerOne extends Component {
   }
   handleStop() {
     // console.log(event);
-    if(event.keyCode === 80) {
+    if(event.code === "ShiftLeft") {
       this.props.punch(true, false, 0, "player-1")
     }
     if(event.keyCode === 83) {
@@ -24,12 +24,12 @@ class PlayerOne extends Component {
       }, 1000)
     }
     const test2 = this.props
-    if(event.keyCode === 71) {
+    if(event.keyCode === 192) {
       setTimeout(function() {
         test2.hadouken(true, false, true, "visible", 0, "player-1")
       }, 1200)
     }
-    if(event.keyCode === 16) {
+    if(event.keyCode === 17) {
       this.props.block(false, "player-1")
     }
   }
@@ -42,7 +42,7 @@ class PlayerOne extends Component {
     if( event.keyCode === 65 && this.props.moveStates.p1Location > 0) {
       this.props.moveBackward(14.8, 1, "player-1")
     }
-    if(event.keyCode === 80) {
+    if(event.code === "ShiftLeft") {
       this.props.punch(false, true, 0, "player-1")
     }
     if(event.keyCode === 83){
@@ -53,14 +53,17 @@ class PlayerOne extends Component {
       this.props.jump(false, true, 10,"player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
-    if(event.keyCode === 16 && this.props.moveStates.blockAllowanceP1) {
+    if(event.keyCode === 17 && this.props.moveStates.blockAllowanceP1) {
       this.props.block(true, "player-1")
       const self = this
       setTimeout(function() {
         self.props.reset("blockAllowanceP1")
-      }, 2000)
+      }, 5000)
     }
-    if(event.keyCode === 71 && this.props.moveStates.hadoukenAllowance) {
+    if(event.keyCode === 9) {
+      console.log("P1 Kick")
+    }
+    if(event.keyCode === 192 && this.props.moveStates.hadoukenAllowance) {
       this.props.hadouken(false, true, true, "visible", 14.8, false, 0, "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1);
@@ -91,9 +94,12 @@ class PlayerOne extends Component {
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
-      if(event.keyCode === 80) {
+      if(event.code === "ShiftLeft" && this.props.moveStates.blockMovP2 === false) {
         console.log("P2 lost HP through punch");
         this.props.punch(false, true, 5, "player-1")
+      } else if (event.code === "ShiftLeft" && this.props.moveStates.blockMovP2) {
+        console.log("no damage to P2")
+        this.props.punch(false, true, 2.5, "player-1")
       }
       else if (event.keyCode === 75) {
         console.log("P2 lost HP through kick");

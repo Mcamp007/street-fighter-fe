@@ -11,7 +11,7 @@ class PlayerTwo extends Component {
   }
   handleStop() {
     // console.log(event);
-    if(event.keyCode === 16) {
+    if(event.code === "AltRight") {
       this.props.punch(true, false, 0, "player-2")
     }
     if(event.keyCode === 40) {
@@ -26,7 +26,7 @@ class PlayerTwo extends Component {
         self.props.jump(true, false, 0, "player-2");
       }, 1200)
     }
-    if(event.keyCode === 18) {
+    if(event.code === "ShiftRight") {
       this.props.block(false, "player-2")
     }
   }
@@ -39,7 +39,7 @@ class PlayerTwo extends Component {
     if (event.keyCode === 39 && this.props.moveStates.p2Location < this.props.moveStates.locationArr[this.props.moveStates.locationArr.length -1]) {
       this.props.moveBackward(14.8, 1, "player-2")
     }
-    if(event.keyCode === 16) {
+    if(event.code === "AltRight") {
       this.props.punch(false, true, 0, "player-2")
     }
     if(event.keyCode === 40){
@@ -48,19 +48,27 @@ class PlayerTwo extends Component {
     if(event.keyCode === 38) {
       this.props.jump(false, true, 10, "player-2")
     }
-    if(event.keyCode === 18 && this.props.moveStates.blockAllowanceP2) {
+    if(event.keyCode === 13) {
+      console.log("P2 Haduken")
+    }
+    if(event.code === "MetaRight") {
+      console.log("P2 Kick")
+    }
+    if(event.code === "ShiftRight" && this.props.moveStates.blockAllowanceP2) {
       this.props.block(true, "player-2")
       const self2 = this
       setTimeout(function() {
         self2.props.reset("blockAllowanceP2")
-      }, 2000)
+      }, 5000)
     }
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
-      if(event.keyCode === 16) {
-              console.log("P1 lost HP through punch");
-              this.props.punch(false, true, 5, "player-2");
+      if(event.code === "AltRight" && this.props.moveStates.blockMovP1 === false) {
+        console.log("P1 lost HP through punch");
+        this.props.punch(false, true, 5, "player-2");
+      } else if (event.code === "AltRight" && this.props.moveStates.blockMovP1) {
+        this.props.punch(false, true, 2.5, "player-2")
       }
     }
   }
