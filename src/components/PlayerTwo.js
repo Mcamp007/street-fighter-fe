@@ -18,6 +18,10 @@ class PlayerTwo extends Component {
     if(event.keyCode === 40) {
       this.props.duck(true, false, "player-2")
     }
+    if(event.keyCode === 18){
+      this.props.block(false, "player-2")
+    }
+
   }
 
   movement() {
@@ -34,6 +38,15 @@ class PlayerTwo extends Component {
     if(event.keyCode === 40){
       this.props.duck(false, true, "player-2")
     }
+
+    if(event.keyCode === 18 && this.props.moveStates.blockAllowanceP2){
+      this.props.block(true, "player-2")
+      const self2 = this
+      setTimeout(function (){
+          self2.props.reset("blockAllowanceP2")
+      }, 2000)
+    }
+
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
@@ -63,8 +76,8 @@ class PlayerTwo extends Component {
             fps={6}
             startFrame={0}
             stopLastFrame={false}
-            reset={!standingMovP2}
-            className="test"/>
+            reset={standingMovP2}
+            />
         </div>
       </div>
     )
@@ -108,6 +121,8 @@ class PlayerTwo extends Component {
           return (duckMovementP2);
       } else if (this.props.moveStates.punchMovP2){
           return (punchMovementP2);
+      } else if (this.props.moveStates.blockMovP2) {
+        return ((<div className="block_containerP2">{standingMovementP2}</div>))
       } else {
           return (standingMovementP2);
       }
