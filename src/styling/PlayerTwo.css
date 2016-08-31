@@ -1,7 +1,13 @@
 .rightMargin {
   bottom: 20px;
   right: 0;
+
   /*background-color: pink;*/
   /*border: solid blue 1px;*/
   position: absolute;
+}
+
+.test {
+  text-align: right;
+  background-color: pink;
 }

@@ -4,9 +4,6 @@ import '../styling/PlayerTwo.css'
 
 
 class PlayerTwo extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount (){
     window.addEventListener('keyup', this.handleStop.bind(this, event), false)
     window.addEventListener('keydown', this.movement.bind(this, event), false)
@@ -59,7 +56,7 @@ class PlayerTwo extends Component {
         <div style={rightMargin}>
           <SpriteAnimator
             ref='sprite'
-            width={93.5}
+            width={94}
             height={108}
             sprite='../src/standingmovP2.svg'
             shouldAnimate={standingMovP2}
@@ -67,7 +64,7 @@ class PlayerTwo extends Component {
             startFrame={0}
             stopLastFrame={false}
             reset={!standingMovP2}
-          />
+            className="test"/>
         </div>
       </div>
     )

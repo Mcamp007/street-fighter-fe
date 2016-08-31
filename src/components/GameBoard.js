@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SpriteAnimator from 'react-sprite-animator'
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
 
@@ -114,7 +113,7 @@ class App extends Component {
     }
   }
   hadukenBall(number, position,player) {
-    console.log("in gameboard", this.state.hadukenBallMarginP1,this.state.hadukenLocation);
+    // console.log("in gameboard", this.state.hadukenBallMarginP1,this.state.hadukenLocation);
     if(player === 'player-1'){
       this.setState({
         hadukenBallMarginP1: this.state.hadukenBallMarginP1 + number,
@@ -123,7 +122,7 @@ class App extends Component {
     }
   }
   reset (){
-    console.log("this is reset",this.state.hadukenBallMarginP1, this.state.hadukenLocation );
+    // console.log("this is reset",this.state.hadukenBallMarginP1, this.state.hadukenLocation );
     this.setState({
       hadukenLocation: this.state.p1Location,
       hadukenBallMarginP1: this.state.marginP1

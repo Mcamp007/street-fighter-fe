@@ -4,9 +4,6 @@ import '../styling/PlayerOne.css';
 
 
 class PlayerOne extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount (){
     window.addEventListener('keyup', this.handleStop.bind(this, event), false)
     window.addEventListener('keydown', this.movement.bind(this, event), false)
@@ -31,8 +28,7 @@ class PlayerOne extends Component {
 
   movement() {
     // console.log(event);
-    const currentMargin = this.props.moveStates.marginP1
-    const currentLocation = this.props.moveStates.p1Location
+
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
       this.props.moveForward(7.4, 1, "player-1");
     }
@@ -51,16 +47,16 @@ class PlayerOne extends Component {
 
     }
     if(event.keyCode === 32){
-      console.log("haduken Location", this.props.moveStates.hadukenLocation);
+      // console.log("haduken Location", this.props.moveStates.hadukenLocation);
       this.props.hadukenMov(false, true,true, "player-1")
       const self = this
       if(this.props.moveStates.hadukenStartP1) {
         const interval = setInterval(function() {
           self.props.hadukenBall(7.4, 1, "player-1")
-          console.log(self.props.moveStates.hadukenLocation);
+          // console.log(self.props.moveStates.hadukenLocation);
 
-          if (self.props.moveStates.hadukenLocation === self.props.moveStates.p2Location){
-            console.log("fuck u");
+          if (self.props.moveStates.hadukenLocation  === self.props.moveStates.p2Location){
+            console.log("player lost hp through haduken");
             clearInterval(interval)
             self.props.hadukenMov(true, false,false, "player-1")
             self.props.reset()
@@ -204,7 +200,7 @@ class PlayerOne extends Component {
             />
         </div>
       </div>
-    )    
+    )
     const movementToRender = () => {
       if(this.props.moveStates.duckMovP1){
         return (duckMovementP1);
