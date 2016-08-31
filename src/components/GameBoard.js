@@ -27,7 +27,8 @@ class App extends Component {
       duckMovP2: false,
       jumpMovP2: false,
       marginBottomP1: 0,
-      marginBottomP2: 0
+      marginBottomP2: 0,
+      hadoukenAllowance: true
     }
   }
   componentDidMount() {
@@ -129,11 +130,23 @@ class App extends Component {
     })
   }
 
-  reset() {
+  reset(identifier) {
+    if(identifier === 'hadoukenBall') {
     this.setState({
       hadoukenBallMarginP1: this.state.marginP1,
       hadoukenBallPosP1: this.state.p1Location
     })
+  } else {
+    this.setState({
+      hadoukenAllowance: false
+    })
+    const self = this
+    const intervalReset = setInterval(function() {
+      self.setState({
+        hadoukenAllowance: true
+      })
+    }, 3000)
+  }
   }
 
   render() {

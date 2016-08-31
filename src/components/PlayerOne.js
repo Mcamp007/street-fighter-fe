@@ -21,7 +21,7 @@ class PlayerOne extends Component {
       setTimeout(function(){
         console.log(test);
         test.jump(true, false,0, "player-1");
-      }, 1200)
+      }, 1000)
     }
     const test2 = this.props
     if(event.keyCode === 71) {
@@ -50,7 +50,7 @@ class PlayerOne extends Component {
       this.props.jump(false, true, 10,"player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
-    if(event.keyCode === 71) {
+    if(event.keyCode === 71 && this.props.moveStates.hadoukenAllowance) {
       this.props.hadouken(false, true, true, "visible", 14.8,  "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1);
@@ -64,15 +64,11 @@ class PlayerOne extends Component {
           console.log("player lost hp through hatoken");
           clearInterval(interval);
           self.props.hadouken(true, false, false, "hidden", 0, "player-1")
-          self.props.reset()
-        }}}, 100)
-
-
-      console.log(this.props.moveStates.hadoukenBallPosP1, this.props.moveStates.p2Location)
-      // if (self.props.moveStates.hadoukenBallP1 + 1 === self.props.moveStates.p2Location && elf.props.moveStates.jumpMovP2) {
-      //   console.log("Safe")
-      // }
+          self.props.reset('hadoukenBall')
+        }}}, 120)
+        this.props.reset('hadoukenAllowance')
   }
+
 
     console.log(this.props.moveStates.p1Location, this.props.moveStates.p2Location);
 
@@ -208,7 +204,7 @@ class PlayerOne extends Component {
               height={35}
               sprite='../src/hadukenStart.svg'
               shouldAnimate={hadoukenBallP1}
-              fps={15}
+              fps={1}
               startFrame={0}
               stopLastFrame={true}
               reset={!hadoukenBallP1}
