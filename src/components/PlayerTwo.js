@@ -29,6 +29,10 @@ class PlayerTwo extends Component {
     if(event.code === "ShiftRight") {
       this.props.block(false, "player-2")
     }
+    if(event.code === "MetaRight") {
+      console.log('stop');
+        this.props.kick(true, false, 0, "player-2")
+    }
   }
 
   movement() {
@@ -52,7 +56,7 @@ class PlayerTwo extends Component {
       console.log("P2 Haduken")
     }
     if(event.code === "MetaRight") {
-      console.log("P2 Kick")
+        this.props.kick(false, true, 0, "player-2")
     }
     if(event.code === "ShiftRight" && this.props.moveStates.blockAllowanceP2) {
       this.props.block(true, "player-2")
@@ -78,6 +82,7 @@ class PlayerTwo extends Component {
     const {punchMovP2} = this.props.moveStates
     const {duckMovP2} = this.props.moveStates
     const {jumpMovP2} = this.props.moveStates
+    const {kickMovP2} = this.props.moveStates
     const rightMargin = {
       marginRight: this.props.moveStates.marginP2 + 'vw'
       };
@@ -121,6 +126,24 @@ class PlayerTwo extends Component {
             </div>
           </div>
         )
+        const kickMovementP2 = (
+          <div className="rightMargin">
+            <div style={rightMargin}>
+              <SpriteAnimator
+                ref='sprite'
+                width={90.5}
+                height={108}
+                sprite='../src/kickP2.svg'
+                shouldAnimate={kickMovP2}
+                fps={4}
+                startFrame={0}
+                stopLastFrame={true}
+                reset={!kickMovP2}
+              />
+            </div>
+          </div>
+        )
+
     const duckMovementP2 = (
           <div className="rightMargin">
             <div style={rightMargin}>
@@ -146,7 +169,7 @@ class PlayerTwo extends Component {
                ref='sprite'
                width={90}
                height={108}
-               sprite='../src/jumpP1.svg'
+               sprite='../src/jumpP2.svg'
                shouldAnimate={jumpMovP2}
                fps={3}
                startFrame={0}
@@ -162,6 +185,8 @@ class PlayerTwo extends Component {
           return (duckMovementP2);
       } else if (this.props.moveStates.punchMovP2){
           return (punchMovementP2);
+      } else if(this.props.moveStates.kickMovP2){
+        return (kickMovementP2)
       } else if (this.props.moveStates.jumpMovP2){
           return (jumpMovementP2);
       } else if (this.props.moveStates.blockMovP2) {

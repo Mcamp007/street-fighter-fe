@@ -13,6 +13,10 @@ class PlayerOne extends Component {
     if(event.code === "ShiftLeft") {
       this.props.punch(true, false, 0, "player-1")
     }
+    if(event.keyCode === 27) {
+      console.log('stop');
+        this.props.kick(true, false, 0, "player-1")
+    }
     if(event.keyCode === 83) {
       this.props.duck(true, false, "player-1")
     }
@@ -45,6 +49,10 @@ class PlayerOne extends Component {
     if(event.code === "ShiftLeft") {
       this.props.punch(false, true, 0, "player-1")
     }
+    if(event.keyCode === 27) {
+      console.log("P1 Kick")
+      this.props.kick(false, true, 0, "player-1")
+    }
     if(event.keyCode === 83){
       this.props.duck(false, true, "player-1")
     }
@@ -60,9 +68,7 @@ class PlayerOne extends Component {
         self.props.reset("blockAllowanceP1")
       }, 5000)
     }
-    if(event.keyCode === 9) {
-      console.log("P1 Kick")
-    }
+
     if(event.keyCode === 192 && this.props.moveStates.hadoukenAllowance) {
       this.props.hadouken(false, true, true, "visible", 14.8, false, 0, "player-1")
       const self = this
@@ -114,6 +120,7 @@ class PlayerOne extends Component {
    const {jumpMovP1} = this.props.moveStates
    const {hadoukenMovP1} = this.props.moveStates
    const {hadoukenBallP1} = this.props.moveStates
+   const {kickMovP1} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
@@ -158,6 +165,23 @@ class PlayerOne extends Component {
            startFrame={0}
            stopLastFrame={true}
            reset={!punchMovP1}
+         />
+       </div>
+     </div>
+   )
+   const kickMovementP1 = (
+     <div className="leftMargin">
+       <div style={leftMargin}>
+         <SpriteAnimator
+           ref='sprite'
+           width={90.5}
+           height={108}
+           sprite='../src/kickP1.svg'
+           shouldAnimate={kickMovP1}
+           fps={4}
+           startFrame={0}
+           stopLastFrame={true}
+           reset={!kickMovP1}
          />
        </div>
      </div>
@@ -240,6 +264,8 @@ class PlayerOne extends Component {
              return (duckMovementP1);
          } else if (this.props.moveStates.punchMovP1){
              return (punchMovementP1);
+         } else if (this.props.moveStates.kickMovP1){
+           return (kickMovementP1)
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
          } else if (this.props.moveStates.hadoukenMovP1){

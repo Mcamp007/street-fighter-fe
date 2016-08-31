@@ -36,7 +36,9 @@ class GameBoard extends Component {
       blockMovP1: false,
       blockMovP2: false,
       blockAllowanceP1: true,
-      blockAllowanceP2: true
+      blockAllowanceP2: true,
+      kickMovP1: false,
+      kickMovP2: false
     }
   }
   componentDidMount() {
@@ -85,6 +87,23 @@ class GameBoard extends Component {
         playerOneHP: this.state.playerOneHP - damage
       })
       console.log(this.state.playerOneHP)
+    }
+  }
+  kick(standingMov, kickMov, damage, player){
+    if(player === 'player-1'){
+      console.log('Gameboard');
+      this.setState({
+        standingMovP1: standingMov,
+        kickMovP1: kickMov,
+        playerTwoHP: this.state.playerTwoHP - damage
+      })
+    }
+    else {
+      this.setState({
+        standingMovP2: standingMov,
+        kickMovP2: kickMov,
+        playerOneHP: this.state.playerOneHP - damage
+      })
     }
   }
 
@@ -189,16 +208,19 @@ class GameBoard extends Component {
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
+                                           kick={this.kick.bind(this)}
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
                                            hadouken={this.hadouken.bind(this)}
                                            ballMove={this.ballMove.bind(this)}
                                            reset={this.reset.bind(this)}
                                            block={this.block.bind(this)}
+
         />
         <PlayerTwo moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
+                                           kick={this.kick.bind(this)}
                                            duck={this.duck.bind(this)}
                                            jump={this.jump.bind(this)}
                                            block={this.block.bind(this)}
