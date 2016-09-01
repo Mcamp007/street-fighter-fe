@@ -18,13 +18,13 @@ timer(){
 }
   render () {
     const time = {
-      left: 36.7 + 'vw',
+      right: 36 + 'vw',
       position: "absolute",
-      top: 110
+      top: 115
     }
     return (
       <div style={time}>
-        <h1>Time Left: {this.props.time} Seconds</h1>
+        <h1>{this.props.time} Seconds Remaining</h1>
       </div>
     )
   }
