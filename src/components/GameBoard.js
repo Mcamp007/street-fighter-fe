@@ -4,6 +4,8 @@ import PlayerTwo from './PlayerTwo';
 import '../styling/GameBoard.css';
 import HPOne from './HPOne';
 import HPTwo from './HPTwo';
+import checkwin from '../utils/checkwin.js';
+import Timer from './Timer.js'
 
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
 class GameBoard extends Component {
@@ -12,7 +14,7 @@ class GameBoard extends Component {
     this.state = {
       marginP1: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7],
+      locationArr: [],
       p1Location: 0,
       p2Location: 0,
       standingMovP1: true,
@@ -29,16 +31,29 @@ class GameBoard extends Component {
       punchMovP2: false,
       duckMovP2: false,
       jumpMovP2: false,
+      hadoukenMovP2: false,
+      hadoukenBallP2: false,
+      hadoukenBallPosP2: 0,
+      hadoukenBallMarginP2: 0,
+      ballVisibilityP2: "hidden",
       playerTwoHP: 100,
       marginBottomP1: 0,
       marginBottomP2: 0,
       hadoukenAllowance: true,
+      hadoukenAllowanceP2: true,
       blockMovP1: false,
       blockMovP2: false,
       blockAllowanceP1: true,
       blockAllowanceP2: true,
       kickMovP1: false,
-      kickMovP2: false
+      kickMovP2: false,
+      duckAllowanceP1: true,
+      duckAllowanceP2: true,
+      timer: 120
+    }
+
+    for (let i = 0; i < 28; i++) {
+      this.state.locationArr.push(i)
     }
   }
   componentDidMount() {
@@ -80,13 +95,22 @@ class GameBoard extends Component {
         punchMovP1: punchMov,
         playerTwoHP: this.state.playerTwoHP - damage
       })
+      if (this.state.playerTwoHP <= 0){
+        this.setState({
+          playerTwoHP: 0
+        })
+      }
     } else {
       this.setState({
         standingMovP2: standingMov,
         punchMovP2: punchMov,
         playerOneHP: this.state.playerOneHP - damage
       })
-      console.log(this.state.playerOneHP)
+      if (this.state.playerOneHP <= 0){
+        this.setState({
+          playerOneHP: 0
+        })
+      }
     }
   }
   kick(standingMov, kickMov, damage, player){
@@ -97,6 +121,11 @@ class GameBoard extends Component {
         kickMovP1: kickMov,
         playerTwoHP: this.state.playerTwoHP - damage
       })
+      if (this.state.playerTwoHP <= 0){
+        this.setState({
+          playerTwoHP: 0
+        })
+      }
     }
     else {
       this.setState({
@@ -104,19 +133,26 @@ class GameBoard extends Component {
         kickMovP2: kickMov,
         playerOneHP: this.state.playerOneHP - damage
       })
+      if (this.state.playerOneHP <= 0){
+        this.setState({
+          playerOneHP: 0
+        })
+      }
     }
   }
 
-  duck(standingMov, duckMov, player) {
+  duck(standingMov, duckMov, duckAllowance, player) {
     if(player === 'player-1'){
       this.setState({
         standingMovP1: standingMov,
-        duckMovP1: duckMov
+        duckMovP1: duckMov,
+        duckAllowanceP1: duckAllowance
       })
     } else {
       this.setState({
         standingMovP2: standingMov,
-        duckMovP2: duckMov
+        duckMovP2: duckMov,
+        duckAllowanceP2: duckAllowance
       })
     }
   }
@@ -134,7 +170,6 @@ class GameBoard extends Component {
         jumpMovP2: jumpMov,
         marginBottomP2: marginB
       })
-
     }
   }
 
@@ -151,6 +186,27 @@ class GameBoard extends Component {
         hadoukenBallPosP1: this.state.p1Location,
         playerTwoHP: this.state.playerTwoHP - damage
       })
+      if (this.state.playerTwoHP <= 0){
+        this.setState({
+          playerTwoHP: 0
+        })
+      }
+    } else {
+      this.setState({
+        standingMovP2: standingMov,
+        hadoukenMovP2: hadoukenMov,
+        hadoukenBallP2: hadoukenBall,
+        ballVisibilityP2: ballVisibility,
+        hadoukenAllowanceP2: hadoukenAllowance,
+        hadoukenBallMarginP2: this.state.marginP2,
+        hadoukenBallPosP2: this.state.p2Location,
+        playerOneHP: this.state.playerOneHP - damage
+      })
+    }
+    if (this.state.playerOneHP <= 0){
+      this.setState({
+        playerOneHP: 0
+      })
     }
   }
 
@@ -161,19 +217,36 @@ class GameBoard extends Component {
         blockMovP1: blockMov,
         blockAllowanceP1: true
       })
+      if (this.state.playerTwoHP <= 0){
+        this.setState({
+          playerTwoHP: 0
+        })
+      }
     } else {
       this.setState({
         blockMovP2: blockMov,
         blockAllowanceP2: true
       })
+      if (this.state.playerOneHP <= 0){
+        this.setState({
+          playerOneHP: 0
+        })
+      }
     }
   }
 
-  ballMove(number) {
+  ballMove(number, player) {
+    if(player === "player-1") {
     this.setState({
-      hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + 14.8,
+      hadoukenBallMarginP1: this.state.hadoukenBallMarginP1 + 3.4,
       hadoukenBallPosP1: this.state.hadoukenBallPosP1 + number
     })
+  } else {
+    this.setState({
+      hadoukenBallMarginP2: this.state.hadoukenBallMarginP2 + 3.4,
+      hadoukenBallPosP2: this.state.hadoukenBallPosP2 - number
+    })
+  }
   }
 
   reset(identifier) {
@@ -197,14 +270,35 @@ class GameBoard extends Component {
         blockAllowanceP2: true,
         blockMovP2: false
       })
+    } else if(identifier === 'hadoukenBallP2') {
+      this.setState({
+        hadoukenBallMarginP2: this.state.marginP2,
+        hadoukenBallPosP2: this.state.p2Location,
+        ballVisibilityP2: "hidden"
+      })
+    } else if(identifier === 'hadoukenAllowanceP2') {
+      this.setState({
+        hadoukenAllowanceP2: true
+      })
     }
+  }
+
+  timer(number) {
+    this.setState({
+      timer: this.state.timer - number
+    })
+  }
+
+  componentDidUpdate() {
+    checkwin.hp(this.state.playerOneHP, this.state.playerTwoHP);
+    checkwin.time(this.state.playerOneHP, this.state.playerTwoHP, this.state.timer);
   }
 
   render() {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
       <div>
-      {/*<img src="../src/background.gif" className="gameboard-bg"></img>*/}
+      <img src="../src/background.gif" className="gameboard-bg" role="presentation"></img>
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
@@ -225,9 +319,12 @@ class GameBoard extends Component {
                                            jump={this.jump.bind(this)}
                                            block={this.block.bind(this)}
                                            reset={this.reset.bind(this)}
+                                           hadouken={this.hadouken.bind(this)}
+                                           ballMove={this.ballMove.bind(this)}
         />
       <HPOne healthbar={this.state.playerOneHP}/>
       <HPTwo healthbar={this.state.playerTwoHP}/>
+      <Timer timer={this.timer.bind(this)} time={this.state.timer}/>
       </div>
     );
   }

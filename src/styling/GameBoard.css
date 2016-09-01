@@ -2,4 +2,10 @@
   z-index: -1;
   background-size: cover;
   position: fixed;
+  margin-top: -20px;
+}
+
+.hp-container {
+  display: flex;
+  flex-direction: row;
 }

@@ -18,21 +18,21 @@ class PlayerOne extends Component {
         this.props.kick(true, false, 0, "player-1")
     }
     if(event.keyCode === 83) {
-      this.props.duck(true, false, "player-1")
+      this.props.duck(true, false, true, "player-1")
     }
     const test = this.props
     if(event.keyCode === 87) {
       setTimeout(function(){
         console.log(test);
         test.jump(true, false,0, "player-1");
-      }, 1000)
+      }, 600)
     }
-    const test2 = this.props
-    if(event.keyCode === 192) {
-      setTimeout(function() {
-        test2.hadouken(true, false, true, "visible", 0, "player-1")
-      }, 1200)
-    }
+    // const test2 = this.props
+    // if(event.keyCode === 192) {
+    //   setTimeout(function() {
+    //     test2.hadouken(true, false, true, "visible", false, 0, "player-1")
+    //   }, 1200)
+    // }
     if(event.keyCode === 17) {
       this.props.block(false, "player-1")
     }
@@ -41,10 +41,10 @@ class PlayerOne extends Component {
   movement() {
     // console.log(event);
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
-      this.props.moveForward(14.8, 1, "player-1");
+      this.props.moveForward(3.4, 1, "player-1");
     }
     if( event.keyCode === 65 && this.props.moveStates.p1Location > 0) {
-      this.props.moveBackward(14.8, 1, "player-1")
+      this.props.moveBackward(3.4, 1, "player-1")
     }
     if(event.code === "ShiftLeft") {
       this.props.punch(false, true, 0, "player-1")
@@ -54,7 +54,7 @@ class PlayerOne extends Component {
       this.props.kick(false, true, 0, "player-1")
     }
     if(event.keyCode === 83){
-      this.props.duck(false, true, "player-1")
+      this.props.duck(false, true, false, "player-1")
     }
     if(event.keyCode === 87) {
       console.log("jumpp");
@@ -70,15 +70,15 @@ class PlayerOne extends Component {
     }
 
     if(event.keyCode === 192 && this.props.moveStates.hadoukenAllowance) {
-      this.props.hadouken(false, true, true, "visible", 14.8, false, 0, "player-1")
+      this.props.hadouken(false, true, true, "visible", 3.4, false, 0, "player-1")
       const self = this
-      const interval = setInterval(function() { self.props.ballMove(1);
+      const interval = setInterval(function() { self.props.ballMove(1, "player-1");
       if(self.props.moveStates.hadoukenBallPosP1 === self.props.moveStates.p2Location) {
         // console.log("ball locartion", self.props.moveStates.hadoukenBallPosP1);
         if(self.props.moveStates.jumpMovP2){
           console.log("save");
           clearInterval(interval)
-          self.props.hadouken(true, false, false, "hidden", 14.8, false, 0, "player-1")
+          self.props.hadouken(true, false, false, "hidden", 3.4, false, 0, "player-1")
           self.props.reset('hadoukenBall');
         }
         else {
@@ -86,12 +86,12 @@ class PlayerOne extends Component {
           clearInterval(interval);
           self.props.hadouken(true, false, false, "hidden", 0, false, 10, "player-1")
           self.props.reset('hadoukenBall')
-        }}}, 120)
+        }}}, 50)
 
         const self2 = this
         setTimeout(function (){
           self2.props.reset('hadoukenAllowance')
-        }, 2000)
+        }, 5000)
 
   }
 
@@ -100,17 +100,22 @@ class PlayerOne extends Component {
 
     if (this.props.moveStates.p1Location + 1 === this.props.moveStates.p2Location){
           // console.log("can loose hp");
-      if(event.code === "ShiftLeft" && this.props.moveStates.blockMovP2 === false) {
+          console.log(this.props.moveStates.duckAllowanceP2)
+      if(this.props.moveStates.punchMovP1 && this.props.moveStates.blockMovP2 === false) {
         console.log("P2 lost HP through punch");
         this.props.punch(false, true, 5, "player-1")
-      } else if (event.code === "ShiftLeft" && this.props.moveStates.blockMovP2) {
+      } else if (this.props.moveStates.punchMovP1 && this.props.moveStates.blockMovP2) {
         console.log("no damage to P2")
         this.props.punch(false, true, 2.5, "player-1")
-      } else if (event.code === "AltLeft" && this.props.moveStates.blockMovP2 === false) {
+      } else if (this.props.moveStates.kickMovP1 && this.props.moveStates.blockMovP2 === false && this.props.moveStates.duckAllowanceP2) {
         console.log("P2 lost HP through kick");
         this.props.kick(false, true, 7, "player-1")
-      } else if (event.code === "AltLeft" && this.props.moveStates.blockMovP2) {
+      } else if (this.props.moveStates.kickMovP1 && this.props.moveStates.blockMovP2) {
+        console.log("less damage thorugh kick");
         this.props.kick(false, true, 3.5, "player-1")
+      } else if (this.props.moveStates.kickMovP1 && this.props.moveStates.duckMovP2) {
+        console.log('no damage');
+        this.props.kick(false, true, 0, "player-1")
       }
     }
   }
@@ -212,9 +217,9 @@ class PlayerOne extends Component {
           <div style={marginBottom}>
             <SpriteAnimator
               ref='sprite'
-              width={90}
-              height={108}
-              sprite='../src/jumpP1.svg'
+              width={44}
+              height={90}
+              sprite='../src/jumptest.svg'
               shouldAnimate={jumpMovP1}
               fps={3}
               startFrame={0}
@@ -250,7 +255,7 @@ class PlayerOne extends Component {
               ref='sprite'
               width={90}
               height={35}
-              sprite='../src/hadukenStart.svg'
+              sprite='../src/hadukenStartP1.svg'
               shouldAnimate={hadoukenBallP1}
               fps={1}
               startFrame={0}
