@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, FormControl } from 'react-bootstrap';
+import helpers from '../utils/helpers.js';
 
 export default class Win extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ export default class Win extends Component {
       modalVisible: "hidden",
       timer: 0,
       winner: "",
-      winnerHP: 0
+      winnerHP: 0,
+      input: ""
     }
     this.checkWin();
   }
@@ -50,6 +52,20 @@ export default class Win extends Component {
   }, 1000)
 }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const data = {
+      time: this.state.timer,
+      winnerHP: this.state.winnerHP,
+      name: this.state.input
+    }
+    console.log(data)
+    helpers.addHighScore(data)
+    .then(res => {
+      console.log(res);
+    })
+  }
   render () {
     const visibility = {
       visibility: this.state.modalVisible
@@ -62,14 +78,10 @@ export default class Win extends Component {
               <Modal.Title>{this.state.winner} HP{this.state.winnerHP}Wins!!!</Modal.Title>
                 </Modal.Header>
                   <Modal.Body>
-                    <FormControl placeholder="Name"></FormControl>
+                    <FormControl onChange={(event) => this.setState({input: event.target.value})} placeholder="Name" />
+                    <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Save changes</Button>
                     <Modal.Title>{this.state.timer} seconds</Modal.Title>
                   </Modal.Body>
-
-                  <Modal.Footer>
-                    <Button>Close</Button>
-                    <Button bsStyle="primary">Save changes</Button>
-                  </Modal.Footer>
 
           </Modal.Dialog>
           </div>
