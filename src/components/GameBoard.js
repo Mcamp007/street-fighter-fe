@@ -4,7 +4,7 @@ import PlayerTwo from './PlayerTwo';
 import '../styling/GameBoard.css';
 import HPOne from './HPOne';
 import HPTwo from './HPTwo';
-import checkwin from '../utils/checkwin.js';
+import Win from './CheckWin';
 import Timer from './Timer.js'
 
 ///////////////////////////////////////use the function that we learned during splits, the one that is realted to state
@@ -49,7 +49,8 @@ class GameBoard extends Component {
       kickMovP2: false,
       duckAllowanceP1: true,
       duckAllowanceP2: true,
-      timer: 120
+      timer: 120,
+      p1Status: null
     }
 
     for (let i = 0; i < 27; i++) {
@@ -291,16 +292,13 @@ class GameBoard extends Component {
     })
   }
 
-  componentDidUpdate() {
-    checkwin.hp(this.state.playerOneHP, this.state.playerTwoHP);
-    checkwin.time(this.state.playerOneHP, this.state.playerTwoHP, this.state.timer);
-  }
+
 
   render() {
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
       <div>
-      <img src="../src/background.gif" className="gameboard-bg" role="presentation"></img>
+        <img className="gameboard-bg" src="../src/background.gif"></img>
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
@@ -327,6 +325,7 @@ class GameBoard extends Component {
       <HPOne healthbar={this.state.playerOneHP}/>
       <HPTwo healthbar={this.state.playerTwoHP}/>
       <Timer timer={this.timer.bind(this)} time={this.state.timer}/>
+      <Win time={this.state.timer} p1hp={this.state.playerOneHP} p2hp={this.state.playerTwoHP} />
       </div>
     );
   }

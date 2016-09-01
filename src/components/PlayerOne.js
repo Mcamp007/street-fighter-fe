@@ -10,14 +10,14 @@ class PlayerOne extends Component {
   }
   handleStop() {
     // console.log(event);
-    if(event.code === "ShiftLeft") {
+    if(event.code === "17") {
       this.props.punch(true, false, 0, "player-1")
     }
     if(event.code === "AltLeft") {
       console.log('stop');
         this.props.kick(true, false, 0, "player-1")
     }
-    if(event.keyCode === 83) {
+    if(event.keyCode === 81) {
       this.props.duck(true, false, true, "player-1")
     }
     const test = this.props
@@ -27,41 +27,49 @@ class PlayerOne extends Component {
         test.jump(true, false,0, "player-1");
       }, 600)
     }
-    // const test2 = this.props
-    // if(event.keyCode === 192) {
-    //   setTimeout(function() {
-    //     test2.hadouken(true, false, true, "visible", false, 0, "player-1")
-    //   }, 1200)
-    // }
-    if(event.keyCode === 17) {
+    if(event.code === "ShiftLeft") {
       this.props.block(false, "player-1")
     }
   }
 
   movement() {
     // console.log(event);
-    if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
+    if( event.keyCode === 65 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
+      event.preventDefault();
+      event.stopPropagation();
       this.props.moveForward(3.4, 1, "player-1");
     }
-    if( event.keyCode === 65 && this.props.moveStates.p1Location > 0) {
+    if( event.key === "1" && this.props.moveStates.p1Location > 0) {
+      event.preventDefault();
+      event.stopPropagation();
       this.props.moveBackward(3.4, 1, "player-1")
     }
-    if(event.code === "ShiftLeft") {
+    if(event.code === 17) {
+      event.preventDefault();
+      event.stopPropagation();
       this.props.punch(false, true, 0, "player-1")
     }
     if(event.code === "AltLeft") {
+      event.preventDefault();
+      event.stopPropagation();
       console.log("P1 Kick")
       this.props.kick(false, true, 0, "player-1")
     }
-    if(event.keyCode === 83){
+    if(event.keyCode === 81){
+      event.preventDefault();
+      event.stopPropagation();
       this.props.duck(false, true, false, "player-1")
     }
     if(event.keyCode === 87) {
+      event.preventDefault();
+      event.stopPropagation();
       console.log("jumpp");
       this.props.jump(false, true, 10,"player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
-    if(event.keyCode === 17 && this.props.moveStates.blockAllowanceP1) {
+    if(event.code === "ShiftLeft" && this.props.moveStates.blockAllowanceP1) {
+      event.preventDefault();
+      event.stopPropagation();
       this.props.block(true, "player-1")
       const self = this
       setTimeout(function() {
@@ -69,7 +77,9 @@ class PlayerOne extends Component {
       }, 5000)
     }
 
-    if(event.keyCode === 192 && this.props.moveStates.hadoukenAllowance) {
+    if(event.keyCode === 90 && this.props.moveStates.hadoukenAllowance) {
+      event.preventDefault();
+      event.stopPropagation();
       this.props.hadouken(false, true, true, "visible", 3.4, false, 0, "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1, "player-1");
@@ -128,6 +138,7 @@ class PlayerOne extends Component {
    const {hadoukenMovP1} = this.props.moveStates
    const {hadoukenBallP1} = this.props.moveStates
    const {kickMovP1} = this.props.moveStates
+   const {p1Status} = this.props.moveStates
    const leftMargin = {
      marginLeft: this.props.moveStates.marginP1 + 'vw'
    };
@@ -265,6 +276,40 @@ class PlayerOne extends Component {
           </div>
         </div>
       )
+      const lost =(
+        <div className="leftMargin">
+          <div style={leftMargin}>
+            <SpriteAnimator
+              ref='sprite'
+              width={210}
+              height={120}
+              sprite='../src/sprites/Hulk/lost.svg'
+              shouldAnimate={p1Status}
+              fps={1}
+              startFrame={0}
+              stopLastFrame={true}
+              reset={!p1Status}
+            />
+          </div>
+        </div>
+      )
+      const won =(
+        <div className="leftMargin">
+          <div style={leftMargin}>
+            <SpriteAnimator
+              ref='sprite'
+              width={210}
+              height={120}
+              sprite='../src/sprites/Hulk/won.svg'
+              shouldAnimate={p1Status}
+              fps={1}
+              startFrame={0}
+              stopLastFrame={true}
+              reset={!p1Status}
+            />
+          </div>
+        </div>
+      )
 
        const movementToRender = () => {
          if(this.props.moveStates.duckMovP1){
@@ -279,7 +324,10 @@ class PlayerOne extends Component {
            return (<div>{hadoukenBallerP1}</div>);
          } else if (this.props.moveStates.blockMovP1) {
            return (<div className="block-containerP1">{standingMovementP1}</div>)
-         } else {
+         } else if (this.props.moveStates.p1Status){
+           return this.props.moveStates.p1Status === true ? won : lost
+         }
+         else {
              return (standingMovementP1);
          }
        };

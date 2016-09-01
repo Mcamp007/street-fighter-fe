@@ -11,16 +11,16 @@ class PlayerTwo extends Component {
   }
   handleStop() {
     // console.log(event);
-    if(event.code === "AltRight") {
+    if(event.keyCode === 32) {
       this.props.punch(true, false, 0, "player-2")
     }
-    if(event.keyCode === 40) {
+    if(event.keyCode === 222) {
       this.props.duck(true, false, true, "player-2")
     }
-    if(event.keyCode === 38) {
+    if(event.keyCode === 186) {
       this.props.jump(true, false, "player-2")
     }
-    if(event.keyCode === 38) {
+    if(event.keyCode === 186) {
       const self = this
       setTimeout(function(){
         self.props.jump(true, false, 0, "player-2");
@@ -29,12 +29,12 @@ class PlayerTwo extends Component {
     if(event.code === "ShiftRight") {
       this.props.block(false, "player-2")
     }
-    if(event.code === "MetaRight") {
+    if(event.code === "AltRight") {
       console.log('stop');
         this.props.kick(true, false, 0, "player-2")
     }
     // const test2 = this.props
-    // if(event.keyCode === 13) {
+    // if(event.keyCode === 190) {
     //   setTimeout(function() {
     //     test2.hadouken(true, false, true, "visible", true, 0, "player-2")
     //   }, 1200)
@@ -43,22 +43,23 @@ class PlayerTwo extends Component {
 
   movement() {
     // console.log(event);
-    if (event.keyCode === 37  && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location){
+    if (event.keyCode === 191  && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location){
       this.props.moveForward(3.4, 1, "player-2")
     }
-    if (event.keyCode === 39 && this.props.moveStates.p2Location < this.props.moveStates.locationArr[this.props.moveStates.locationArr.length -1]) {
+    if (event.keyCode === 221 && this.props.moveStates.p2Location < this.props.moveStates.locationArr[this.props.moveStates.locationArr.length -1]) {
       this.props.moveBackward(3.4, 1, "player-2")
     }
-    if(event.code === "AltRight") {
+    if(event.keyCode === 32) {
       this.props.punch(false, true, 0, "player-2")
+      console.log("punch")
     }
-    if(event.keyCode === 40){
+    if(event.keyCode === 222){
       this.props.duck(false, true, false, "player-2")
     }
-    if(event.keyCode === 38) {
+    if(event.keyCode === 186) {
       this.props.jump(false, true, 10, "player-2")
     }
-    if(event.code === "MetaRight") {
+    if(event.code === "AltRight") {
         this.props.kick(false, true, 0, "player-2")
     }
     if(event.code === "ShiftRight" && this.props.moveStates.blockAllowanceP2) {
@@ -68,7 +69,7 @@ class PlayerTwo extends Component {
         self2.props.reset("blockAllowanceP2")
       }, 5000)
     }
-    if(event.keyCode === 13 && this.props.moveStates.hadoukenAllowanceP2) {
+    if(event.keyCode === 190 && this.props.moveStates.hadoukenAllowanceP2) {
       this.props.hadouken(false, true, true, "visible", 3.4, false, 0, "player-2")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1, "player-2");

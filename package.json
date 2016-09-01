@@ -20,5 +20,9 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
+  },
+  "window" : {
+      "fullscreen" : true,
+      "toolbar" : false
   }
 }
