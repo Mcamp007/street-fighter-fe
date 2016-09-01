@@ -7,7 +7,8 @@ export default class Win extends Component {
     this.state = {
       modalVisible: "hidden",
       timer: 0,
-      winner: ""
+      winner: "",
+      winnerHP: 0
     }
     this.checkWin();
   }
@@ -22,16 +23,28 @@ export default class Win extends Component {
         modalVisible: "visible",
         timer: self.props.time
       })
-      if(self.props.p1hp > self.props.p2hp) {
+      if (self.props.p1hp === self.props.p2hp){
+        self.setState({
+          winner: "Its a tie",
+          timer: self.props.time
+        })
+      } else if(self.props.p1hp > self.props.p2hp) {
         self.setState({
           winner: "Hulk",
-          timer: self.props.time
+          timer: self.props.time,
+          winnerHP: self.props.p1hp
         })
-      } else {
+        self.props.deadOrAlive(true ,'player-1')
+        self.props.deadOrAlive(false ,'player-2')
+      }
+      else {
         self.setState({
           winner: "Ken",
-          timer: self.props.time
+          timer: self.props.time,
+          winnerHP: self.props.p2hp
         })
+        self.props.deadOrAlive(false ,'player-1')
+        self.props.deadOrAlive(true ,'player-2')
       }
     }
   }, 1000)
@@ -46,7 +59,7 @@ export default class Win extends Component {
         <div className="static-modal">
           <Modal.Dialog>
             <Modal.Header>
-              <Modal.Title>{this.state.winner} Wins!!!</Modal.Title>
+              <Modal.Title>{this.state.winner} HP{this.state.winnerHP}Wins!!!</Modal.Title>
                 </Modal.Header>
                   <Modal.Body>
                     <FormControl placeholder="Name"></FormControl>

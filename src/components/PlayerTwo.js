@@ -121,6 +121,8 @@ class PlayerTwo extends Component {
     const {kickMovP2} = this.props.moveStates
     const {hadoukenMovP2} = this.props.moveStates
     const {hadoukenBallP2} = this.props.moveStates
+    const {p1Status} = this.props.moveStates
+    const {p2Status} = this.props.moveStates
     const rightMargin = {
       marginRight: this.props.moveStates.marginP2 + 'vw'
       };
@@ -132,7 +134,8 @@ class PlayerTwo extends Component {
 
     const ballMargin = {
       marginRight: this.props.moveStates.hadoukenBallMarginP2 + 'vw',
-      visibility: this.props.moveStates.ballVisibilityP2
+      visibility: this.props.moveStates.ballVisibilityP2,
+      marginBottom: 31
     }
 
     const standingMovementP2 = (
@@ -140,11 +143,11 @@ class PlayerTwo extends Component {
         <div style={rightMargin}>
           <SpriteAnimator
             ref='sprite'
-            width={70}
-            height={81}
+            width={66.8}
+            height={94}
             sprite='../src/sprites/Ken/standing.svg'
             shouldAnimate={standingMovP2}
-            fps={6}
+            fps={13}
             startFrame={0}
             stopLastFrame={false}
             reset={!standingMovP2}
@@ -157,13 +160,13 @@ class PlayerTwo extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={55.5}
-                height={80.8}
+                width={108}
+                height={94}
                 sprite='../src/sprites/Ken/punch.svg'
                 shouldAnimate={punchMovP2}
                 fps={1}
                 startFrame={0}
-                stopLastFrame={true}
+                stopLastFrame={false}
                 reset={!punchMovP2}
               />
             </div>
@@ -174,8 +177,8 @@ class PlayerTwo extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={67.4}
-                height={80.8}
+                width={114}
+                height={94}
                 sprite='./src/sprites/Ken/kick.svg'
                 shouldAnimate={kickMovP2}
                 fps={1}
@@ -192,8 +195,8 @@ class PlayerTwo extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={35}
-                height={80}
+                width={61}
+                height={61}
                 sprite='../src/sprites/Ken/duck.svg'
                 shouldAnimate={duckMovP2}
                 fps={6}
@@ -210,11 +213,11 @@ class PlayerTwo extends Component {
            <div style={marginBottom}>
              <SpriteAnimator
                ref='sprite'
-               width={32.5}
-               height={67}
+               width={48}
+               height={70}
                sprite='../src/sprites/Ken/jump.svg'
                shouldAnimate={jumpMovP2}
-               fps={3}
+               fps={1}
                startFrame={0}
                stopLastFrame={true}
                reset={!jumpMovP2}
@@ -234,7 +237,7 @@ class PlayerTwo extends Component {
                  shouldAnimate={hadoukenBallP2}
                  fps={1}
                  startFrame={0}
-                 stopLastFrame={true}
+                 stopLastFrame={false}
                  reset={!hadoukenBallP2}
                />
              </div>
@@ -246,14 +249,48 @@ class PlayerTwo extends Component {
              <div style={rightMargin}>
                <SpriteAnimator
                  ref='sprite'
-                 width={73}
-                 height={76}
+                 width={112}
+                 height={77.3}
                  sprite='../src/sprites/Ken/hadukenMov.svg'
                  shouldAnimate={hadoukenMovP2}
                  fps={10}
                  startFrame={0}
                  stopLastFrame={true}
                  reset={!hadoukenMovP2}
+               />
+             </div>
+           </div>
+         )
+         const lost =(
+           <div className="rightMargin">
+             <div style={rightMargin}>
+               <SpriteAnimator
+                 ref='sprite'
+                 width={128}
+                 height={31.5}
+                 sprite='../src/sprites/Ken/dead.svg'
+                 shouldAnimate={p2Status}
+                 fps={1}
+                 startFrame={0}
+                 stopLastFrame={true}
+                 reset={!p2Status}
+               />
+             </div>
+           </div>
+         )
+         const won =(
+           <div className="rightMargin">
+             <div style={rightMargin}>
+               <SpriteAnimator
+                 ref='sprite'
+                 width={55}
+                 height={124}
+                 sprite='../src/sprites/Ken/won.svg'
+                 shouldAnimate={p2Status}
+                 fps={1}
+                 startFrame={0}
+                 stopLastFrame={true}
+                 reset={!p2Status}
                />
              </div>
            </div>
@@ -272,7 +309,11 @@ class PlayerTwo extends Component {
         return (<div className="block-containerP2">{standingMovementP2}</div>)
       } else if (this.props.moveStates.hadoukenMovP2) {
         return (<div>{hadukenMovementP2} {hadoukenBallerP2}</div>)
-      } else {
+      } else if (this.props.moveStates.p2Status){
+         return (won)
+       } else if (this.props.moveStates.p2Status === false){
+         return (lost)
+       } else {
           return (standingMovementP2);
       }
     };

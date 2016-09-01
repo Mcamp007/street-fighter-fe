@@ -50,7 +50,8 @@ class GameBoard extends Component {
       duckAllowanceP1: true,
       duckAllowanceP2: true,
       timer: 120,
-      p1Status: null
+      p1Status: null,
+      p2Status: null
     }
 
     for (let i = 0; i < 27; i++) {
@@ -292,6 +293,20 @@ class GameBoard extends Component {
     })
   }
 
+deadOrAlive (status, player){
+  console.log('dead or alloiiiiveeee');
+  if(player === 'player-1'){
+    this.setState({
+      p1Status: status
+    })
+  }
+  else {
+    this.setState({
+      p2Status: status
+    })
+  }
+
+}
 
 
   render() {
@@ -325,7 +340,7 @@ class GameBoard extends Component {
       <HPOne healthbar={this.state.playerOneHP}/>
       <HPTwo healthbar={this.state.playerTwoHP}/>
       <Timer timer={this.timer.bind(this)} time={this.state.timer}/>
-      <Win time={this.state.timer} p1hp={this.state.playerOneHP} p2hp={this.state.playerTwoHP} />
+      <Win deadOrAlive={this.deadOrAlive.bind(this)} time={this.state.timer} p1hp={this.state.playerOneHP} p2hp={this.state.playerTwoHP} />
       </div>
     );
   }

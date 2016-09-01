@@ -281,8 +281,8 @@ class PlayerOne extends Component {
           <div style={leftMargin}>
             <SpriteAnimator
               ref='sprite'
-              width={210}
-              height={120}
+              width={190}
+              height={70}
               sprite='../src/sprites/Hulk/lost.svg'
               shouldAnimate={p1Status}
               fps={1}
@@ -298,7 +298,7 @@ class PlayerOne extends Component {
           <div style={leftMargin}>
             <SpriteAnimator
               ref='sprite'
-              width={210}
+              width={200}
               height={120}
               sprite='../src/sprites/Hulk/won.svg'
               shouldAnimate={p1Status}
@@ -325,7 +325,9 @@ class PlayerOne extends Component {
          } else if (this.props.moveStates.blockMovP1) {
            return (<div className="block-containerP1">{standingMovementP1}</div>)
          } else if (this.props.moveStates.p1Status){
-           return this.props.moveStates.p1Status === true ? won : lost
+           return (won)
+         } else if (this.props.moveStates.p1Status === false){
+           return (lost)
          }
          else {
              return (standingMovementP1);
