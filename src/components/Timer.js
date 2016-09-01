@@ -18,7 +18,7 @@ timer(){
 }
   render () {
     const time = {
-      right: 36 + 'vw',
+      right: 36.8 + 'vw',
       position: "absolute",
       top: 115
     }
