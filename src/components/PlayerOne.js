@@ -9,16 +9,15 @@ class PlayerOne extends Component {
     window.addEventListener('keydown', this.movement.bind(this, event), false)
   }
   handleStop() {
-    console.log(event);
+    // console.log(event);
+    if( event.keyCode === 68){
+      this.props.moveForward(1.6, 1, false, "player-1");
+    }
     if(event.keyCode === 80) {
       this.props.punch(true, false, "player-1")
     }
     if(event.keyCode === 83) {
       this.props.duck(true, false, "player-1")
-      if(this.props.moveStates.jumpMovP1){
-        clearInterval(this.interval)
-        this.props.jump(true, false, "player-1");
-      }
     }
     const test = this.props
     if(event.keyCode === 87) {
@@ -34,14 +33,14 @@ class PlayerOne extends Component {
 
 
   movement() {
-    console.log(event);
+    // console.log(event);
 // event.preventDefault()
 
     if( event.keyCode === 68 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
-      this.props.moveForward(7.4, 1, "player-1");
+      this.props.moveForward(1.6, 1, true, "player-1");
     }
     if( event.keyCode === 65 && this.props.moveStates.p1Location > 0) {
-      this.props.moveBackward(7.4, 1, "player-1")
+      this.props.moveBackward(1.6, 1, "player-1")
     }
     if(event.keyCode === 80) {
       this.props.punch(false, true, "player-1")
@@ -66,7 +65,7 @@ class PlayerOne extends Component {
       const self = this
       if(this.props.moveStates.hadukenStartP1) {
         const interval = setInterval(function() {
-          self.props.hadukenBall(7.4, 1, "player-1")
+          self.props.hadukenBall(1.6, 1, "player-1")
           // console.log(self.props.moveStates.hadukenLocation);
 
           if (self.props.moveStates.hadukenLocation  === self.props.moveStates.p2Location){
@@ -75,12 +74,12 @@ class PlayerOne extends Component {
             self.props.hadukenMov(true, false,false, null, "player-1")
             self.props.reset('hadukenBall')
           }
-        }, 100);
+        }, 20);
       }
       const self2 = this
       setTimeout(function() {
         self2.props.reset('hadukenAllowance');
-      },2000)
+      },5000)
 
     }
 
@@ -114,6 +113,7 @@ class PlayerOne extends Component {
     const {jumpMovP1} = this.props.moveStates
     const {hadukenStartP1} = this.props.moveStates
     const {hadukenMovementP1} = this.props.moveStates
+    const {moveForwardP1} = this.props.moveStates
     const leftMargin = {
       marginLeft: this.props.moveStates.marginP1 + 'vw'
     };
@@ -134,6 +134,23 @@ class PlayerOne extends Component {
             startFrame={0}
             stopLastFrame={false}
             reset={standingMovP1}
+            />
+        </div>
+      </div>
+    )
+    const moveForward = (
+      <div className="leftMargin">
+        <div style={leftMargin}>
+          <SpriteAnimator
+            ref='sprite'
+            width={49}
+            height={101}
+            sprite='../src/walkForwardP1.svg'
+            shouldAnimate={moveForwardP1}
+            fps={1}
+            startFrame={0}
+            stopLastFrame={false}
+            reset={moveForwardP1}
             />
         </div>
       </div>
@@ -217,6 +234,8 @@ class PlayerOne extends Component {
     const movementToRender = () => {
       if(this.props.moveStates.duckMovP1){
         return (duckMovementP1);
+      } else if (this.props.moveStates.moveForwardP1){
+        return (moveForward)
       } else if (this.props.moveStates.punchMovP1){
         return (punchMovementP1);
       } else if (this.props.moveStates.jumpMovP1){

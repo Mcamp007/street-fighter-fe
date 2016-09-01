@@ -7,9 +7,10 @@ class GameBoard extends Component {
   constructor(props){
     super(props)
     this.state = {
+      moveForwardP1: false,
       marginP1: 0,
       marginP2: 0,
-      locationArr: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
+      locationArr: [],
       p1Location: 0,
       p2Location: 0,
       standingMovP1: true,
@@ -31,6 +32,10 @@ class GameBoard extends Component {
       blockAllowanceP1: true,
       blockAllowanceP2: true
     }
+
+    for (let i = 0; i < 57; i++){
+      this.state.locationArr.push(i)
+    }
   }
 
   componentDidMount() {
@@ -39,11 +44,12 @@ class GameBoard extends Component {
       })
       // this.setState({standingMov: true})
    }
-  moveForward(number, position, player) {
+  moveForward(number, position, state, player) {
     if(player === "player-1") {
     this.setState({
       marginP1: this.state.marginP1 + number,
-      p1Location: this.state.p1Location + position
+      p1Location: this.state.p1Location + position,
+      moveForwardP1: state
     })
   } else {
     this.setState({
