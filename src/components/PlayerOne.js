@@ -147,11 +147,11 @@ class PlayerOne extends Component {
        <div style={leftMargin}>
          <SpriteAnimator
            ref='sprite'
-           width={93.5}
-           height={108}
-           sprite='../src/standingmovP1.svg'
+           width={161}
+           height={120}
+           sprite='../src/sprites/Hulk/standing.svg'
            shouldAnimate={standingMovP1}
-           fps={6}
+           fps={15}
            startFrame={0}
            stopLastFrame={false}
            reset={standingMovP1}
@@ -164,9 +164,9 @@ class PlayerOne extends Component {
        <div style={leftMargin}>
          <SpriteAnimator
            ref='sprite'
-           width={73}
-           height={108}
-           sprite='../src/punchP1.svg'
+           width={204}
+           height={125}
+           sprite='../src/sprites/Hulk/punch.svg'
            shouldAnimate={punchMovP1}
            fps={40}
            startFrame={0}
@@ -181,9 +181,9 @@ class PlayerOne extends Component {
        <div style={leftMargin}>
          <SpriteAnimator
            ref='sprite'
-           width={90.5}
-           height={108}
-           sprite='../src/kickP1.svg'
+           width={215}
+           height={133}
+           sprite='../src/sprites/Hulk/kick.svg'
            shouldAnimate={kickMovP1}
            fps={4}
            startFrame={0}
@@ -199,9 +199,9 @@ class PlayerOne extends Component {
            <div style={leftMargin}>
              <SpriteAnimator
                ref='sprite'
-               width={46}
-               height={108}
-               sprite='../src/duckP1.svg'
+               width={148}
+               height={96}
+               sprite='../src/sprites/Hulk/duck.svg'
                shouldAnimate={duckMovP1}
                fps={6}
                startFrame={0}
@@ -217,9 +217,9 @@ class PlayerOne extends Component {
           <div style={marginBottom}>
             <SpriteAnimator
               ref='sprite'
-              width={44}
+              width={143}
               height={90}
-              sprite='../src/jumptest.svg'
+              sprite='../src/sprites/Hulk/jump2.svg'
               shouldAnimate={jumpMovP1}
               fps={3}
               startFrame={0}
@@ -230,32 +230,32 @@ class PlayerOne extends Component {
         </div>
         )
 
-      const hadukenMovementP1= (
-        <div className="leftMargin">
-          <div style={leftMargin}>
-            <SpriteAnimator
-              ref='sprite'
-              width={90}
-              height={100}
-              sprite='../src/hadukenMovP1.svg'
-              shouldAnimate={hadoukenMovP1}
-              fps={15}
-              startFrame={0}
-              stopLastFrame={true}
-              reset={!hadoukenMovP1}
-            />
-          </div>
-        </div>
-      )
+      // const hadukenMovementP1= (
+      //   <div className="leftMargin">
+      //     <div style={leftMargin}>
+      //       <SpriteAnimator
+      //         ref='sprite'
+      //         width={90}
+      //         height={100}
+      //         sprite='../src/hadukenMovP1.svg'
+      //         shouldAnimate={hadoukenMovP1}
+      //         fps={15}
+      //         startFrame={0}
+      //         stopLastFrame={true}
+      //         reset={!hadoukenMovP1}
+      //       />
+      //     </div>
+      //   </div>
+      // )
 
       const hadoukenBallerP1 =(
         <div className="leftMargin">
           <div style={ballMargin}>
             <SpriteAnimator
               ref='sprite'
-              width={90}
-              height={35}
-              sprite='../src/hadukenStartP1.svg'
+              width={210}
+              height={120}
+              sprite='../src/sprites/Hulk/haduken.svg'
               shouldAnimate={hadoukenBallP1}
               fps={1}
               startFrame={0}
@@ -276,7 +276,7 @@ class PlayerOne extends Component {
          } else if (this.props.moveStates.jumpMovP1){
              return (jumpMovementP1);
          } else if (this.props.moveStates.hadoukenMovP1){
-           return (<div>{hadukenMovementP1} {hadoukenBallerP1}</div>);
+           return (<div>{hadoukenBallerP1}</div>);
          } else if (this.props.moveStates.blockMovP1) {
            return (<div className="block-containerP1">{standingMovementP1}</div>)
          } else {

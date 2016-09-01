@@ -139,9 +139,9 @@ class PlayerTwo extends Component {
         <div style={rightMargin}>
           <SpriteAnimator
             ref='sprite'
-            width={93.5}
-            height={108}
-            sprite='../src/standingmovP2.svg'
+            width={70}
+            height={81}
+            sprite='../src/sprites/Ken/standing.svg'
             shouldAnimate={standingMovP2}
             fps={6}
             startFrame={0}
@@ -156,11 +156,11 @@ class PlayerTwo extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={73}
-                height={108}
-                sprite='../src/punchP2.svg'
+                width={55.5}
+                height={80.8}
+                sprite='../src/sprites/Ken/punch.svg'
                 shouldAnimate={punchMovP2}
-                fps={40}
+                fps={1}
                 startFrame={0}
                 stopLastFrame={true}
                 reset={!punchMovP2}
@@ -173,11 +173,11 @@ class PlayerTwo extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={90.5}
-                height={108}
-                sprite='../src/kickP2.svg'
+                width={67.4}
+                height={80.8}
+                sprite='./src/sprites/Ken/kick.svg'
                 shouldAnimate={kickMovP2}
-                fps={4}
+                fps={1}
                 startFrame={0}
                 stopLastFrame={true}
                 reset={!kickMovP2}
@@ -191,9 +191,9 @@ class PlayerTwo extends Component {
             <div style={rightMargin}>
               <SpriteAnimator
                 ref='sprite'
-                width={46}
-                height={108}
-                sprite='../src/duckP2.svg'
+                width={35}
+                height={80}
+                sprite='../src/sprites/Ken/duck.svg'
                 shouldAnimate={duckMovP2}
                 fps={6}
                 startFrame={0}
@@ -209,9 +209,9 @@ class PlayerTwo extends Component {
            <div style={marginBottom}>
              <SpriteAnimator
                ref='sprite'
-               width={90}
-               height={108}
-               sprite='../src/jumpP2.svg'
+               width={32.5}
+               height={67}
+               sprite='../src/sprites/Ken/jump.svg'
                shouldAnimate={jumpMovP2}
                fps={3}
                startFrame={0}
@@ -227,9 +227,9 @@ class PlayerTwo extends Component {
              <div style={ballMargin}>
                <SpriteAnimator
                  ref='sprite'
-                 width={90}
-                 height={35}
-                 sprite='../src/hadukenStartP2.svg'
+                 width={30}
+                 height={28}
+                 sprite='../src/sprites/Ken/haduken.svg'
                  shouldAnimate={hadoukenBallP2}
                  fps={1}
                  startFrame={0}
@@ -245,11 +245,11 @@ class PlayerTwo extends Component {
              <div style={rightMargin}>
                <SpriteAnimator
                  ref='sprite'
-                 width={90}
-                 height={100}
-                 sprite='../src/hadukenMovP2.svg'
+                 width={73}
+                 height={76}
+                 sprite='../src/sprites/Ken/hadukenMov.svg'
                  shouldAnimate={hadoukenMovP2}
-                 fps={15}
+                 fps={10}
                  startFrame={0}
                  stopLastFrame={true}
                  reset={!hadoukenMovP2}

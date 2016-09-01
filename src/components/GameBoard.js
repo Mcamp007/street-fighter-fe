@@ -52,13 +52,15 @@ class GameBoard extends Component {
       timer: 120
     }
 
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 27; i++) {
       this.state.locationArr.push(i)
     }
   }
   componentDidMount() {
-      this.setState({p1Location: this.state.locationArr[0],
-                    p2Location: this.state.locationArr[this.state.locationArr.length - 1]
+      this.setState({p1Location: this.state.locationArr[8],
+                    p2Location: this.state.locationArr[this.state.locationArr.length - 8],
+                    marginP1: 27.2,
+                    marginP2: 27.2,
       })
    }
 
