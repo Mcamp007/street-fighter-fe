@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, FormControl } from 'react-bootstrap';
 import helpers from '../utils/helpers.js';
+import { browserHistory } from 'react-router';
 
 export default class Win extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ export default class Win extends Component {
           winner: "Its a tie",
           timer: self.props.time
         })
+        location.reload()
       } else if(self.props.p1hp > self.props.p2hp) {
         self.setState({
           winner: "Hulk",

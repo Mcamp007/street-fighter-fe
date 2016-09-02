@@ -18,13 +18,20 @@ timer(){
 }
   render () {
     const time = {
-      right: 36.8 + 'vw',
+      fontSize: 20,
+      opacity: 0.8,
+      textAlign: 'center',
+      right: 48 + 'vw',
       position: "absolute",
-      top: 115
+      padding: 10,
+      top: 100,
+      width: 100,
+      borderRadius: 20,
+      backgroundColor: 'white'
     }
     return (
       <div style={time}>
-        <h1>{this.props.time} Seconds Remaining</h1>
+        <div>{this.props.time}</div>
       </div>
     )
   }

@@ -12,7 +12,7 @@ class App extends Component {
         <Navbar id="navbar">
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to='/'>React Fighter</Link>
+              <Link to='/home'>React Fighter</Link>
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
