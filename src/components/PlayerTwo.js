@@ -121,7 +121,6 @@ class PlayerTwo extends Component {
     const {kickMovP2} = this.props.moveStates
     const {hadoukenMovP2} = this.props.moveStates
     const {hadoukenBallP2} = this.props.moveStates
-    const {p1Status} = this.props.moveStates
     const {p2Status} = this.props.moveStates
     const rightMargin = {
       marginRight: this.props.moveStates.marginP2 + 'vw'

@@ -135,7 +135,6 @@ class PlayerOne extends Component {
    const {punchMovP1} = this.props.moveStates
    const {duckMovP1} = this.props.moveStates
    const {jumpMovP1} = this.props.moveStates
-   const {hadoukenMovP1} = this.props.moveStates
    const {hadoukenBallP1} = this.props.moveStates
    const {kickMovP1} = this.props.moveStates
    const {p1Status} = this.props.moveStates
@@ -240,24 +239,6 @@ class PlayerOne extends Component {
           </div>
         </div>
         )
-
-      // const hadukenMovementP1= (
-      //   <div className="leftMargin">
-      //     <div style={leftMargin}>
-      //       <SpriteAnimator
-      //         ref='sprite'
-      //         width={90}
-      //         height={100}
-      //         sprite='../src/hadukenMovP1.svg'
-      //         shouldAnimate={hadoukenMovP1}
-      //         fps={15}
-      //         startFrame={0}
-      //         stopLastFrame={true}
-      //         reset={!hadoukenMovP1}
-      //       />
-      //     </div>
-      //   </div>
-      // )
 
       const hadoukenBallerP1 =(
         <div className="leftMargin">

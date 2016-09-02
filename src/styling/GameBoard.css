@@ -1,7 +1,7 @@
 .gameboard-bg {
   z-index: -1;
   background-size: cover;
-  position: fixed;
+  position: absolute;
   margin-top: -20px;
   height: 100vh;
   width: 100vw;

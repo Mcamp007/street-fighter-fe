@@ -1,0 +1,7 @@
+.hide-cover {
+  visibility: hidden;
+}
+
+.show-cover {
+  visibility: visible;
+}

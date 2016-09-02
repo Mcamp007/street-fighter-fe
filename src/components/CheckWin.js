@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, FormControl } from 'react-bootstrap';
 import helpers from '../utils/helpers.js';
-import { browserHistory } from 'react-router';
 
 export default class Win extends Component {
   constructor(props) {
@@ -19,7 +18,6 @@ export default class Win extends Component {
   checkWin() {
   const self = this
   const timer = setInterval(function(){
-    console.log("timer fuck u ");
     if(self.props.time === 0 || self.props.p1hp === 0 || self.props.p2hp === 0){
       clearInterval(timer)
       self.setState({
@@ -31,7 +29,7 @@ export default class Win extends Component {
           winner: "Its a tie",
           timer: self.props.time
         })
-        // location.reload()
+        location.reload()
       } else if(self.props.p1hp > self.props.p2hp) {
         self.setState({
           winner: "Hulk",
