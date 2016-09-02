@@ -13,6 +13,7 @@ We decided to re build the Acarde game Street Fighter in react using javascript.
   
 
 ### Instructions
+
 ###### P1
   - 1 => backwards
   - a => forwards 
@@ -22,6 +23,7 @@ We decided to re build the Acarde game Street Fighter in react using javascript.
   - LeftAlt => kick
   - control => punch
   - LeftShift => block
+  - 
 ###### P2
   - ? => forward
   - } => backwards 
