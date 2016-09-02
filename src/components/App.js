@@ -46,7 +46,7 @@ class App extends Component {
         </Navbar>
         {this.props.children}
         <div className={this.state.logo}>
-        <img src='../../SFLogo.png' role="presentation"></img>
+        <img src='http://i65.tinypic.com/5x2b11.jpg' role="presentation"></img>
         </div>
       </div>
     );

@@ -159,7 +159,7 @@ class PlayerOne extends Component {
            ref='sprite'
            width={161}
            height={120}
-           sprite='../src/sprites/Hulk/standing.svg'
+           sprite='http://imgh.us/standing.svg'
            shouldAnimate={standingMovP1}
            fps={15}
            startFrame={0}
@@ -176,7 +176,7 @@ class PlayerOne extends Component {
            ref='sprite'
            width={204}
            height={125}
-           sprite='../src/sprites/Hulk/punch.svg'
+           sprite='http://imgh.us/punch.svg'
            shouldAnimate={punchMovP1}
            fps={40}
            startFrame={0}
@@ -193,7 +193,7 @@ class PlayerOne extends Component {
            ref='sprite'
            width={215}
            height={133}
-           sprite='../src/sprites/Hulk/kick.svg'
+           sprite='http://imgh.us/kick.svg'
            shouldAnimate={kickMovP1}
            fps={4}
            startFrame={0}
@@ -211,7 +211,7 @@ class PlayerOne extends Component {
                ref='sprite'
                width={148}
                height={96}
-               sprite='../src/sprites/Hulk/duck.svg'
+               sprite='http://imgh.us/duck.svg'
                shouldAnimate={duckMovP1}
                fps={6}
                startFrame={0}
@@ -229,7 +229,7 @@ class PlayerOne extends Component {
               ref='sprite'
               width={143}
               height={90}
-              sprite='../src/sprites/Hulk/jump2.svg'
+              sprite='http://imgh.us/jump2.svg'
               shouldAnimate={jumpMovP1}
               fps={3}
               startFrame={0}
@@ -247,7 +247,7 @@ class PlayerOne extends Component {
               ref='sprite'
               width={210}
               height={120}
-              sprite='../src/sprites/Hulk/haduken.svg'
+              sprite='http://imgh.us/haduken.svg'
               shouldAnimate={hadoukenBallP1}
               fps={1}
               startFrame={0}
@@ -264,7 +264,7 @@ class PlayerOne extends Component {
               ref='sprite'
               width={190}
               height={70}
-              sprite='../src/sprites/Hulk/lost.svg'
+              sprite='http://imgh.us/lost.svg'
               shouldAnimate={p1Status}
               fps={1}
               startFrame={0}
@@ -281,7 +281,7 @@ class PlayerOne extends Component {
               ref='sprite'
               width={200}
               height={120}
-              sprite='../src/sprites/Hulk/won.svg'
+              sprite='http://imgh.us/won.svg'
               shouldAnimate={p1Status}
               fps={1}
               startFrame={0}

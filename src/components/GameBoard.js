@@ -313,7 +313,7 @@ deadOrAlive (status, player){
 // console.log("standing move", this.state.standingMov, "punchMov", this.state.punchMov);
     return (
       <div>
-        <img className="gameboard-bg" src="../src/background.gif" role="presentation"></img>
+        <img className="gameboard-bg" src="https://s11.postimg.org/4f20kxwkj/background.gif" role="presentation"></img>
         <PlayerOne moveStates={this.state} moveForward={this.moveForward.bind(this)}
                                            moveBackward={this.moveBackward.bind(this)}
                                            punch={this.punch.bind(this)}
