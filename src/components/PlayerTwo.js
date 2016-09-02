@@ -144,7 +144,7 @@ class PlayerTwo extends Component {
             ref='sprite'
             width={66.8}
             height={94}
-            sprite='../src/sprites/Ken/standing.svg'
+            sprite='http://imgh.us/standing_1.svg'
             shouldAnimate={standingMovP2}
             fps={13}
             startFrame={0}
@@ -161,7 +161,7 @@ class PlayerTwo extends Component {
                 ref='sprite'
                 width={108}
                 height={94}
-                sprite='../src/sprites/Ken/punch.svg'
+                sprite='http://imgh.us/punch_1.svg'
                 shouldAnimate={punchMovP2}
                 fps={1}
                 startFrame={0}
@@ -178,7 +178,7 @@ class PlayerTwo extends Component {
                 ref='sprite'
                 width={114}
                 height={94}
-                sprite='./src/sprites/Ken/kick.svg'
+                sprite='http://imgh.us/kick_1.svg'
                 shouldAnimate={kickMovP2}
                 fps={1}
                 startFrame={0}
@@ -196,7 +196,7 @@ class PlayerTwo extends Component {
                 ref='sprite'
                 width={61}
                 height={61}
-                sprite='../src/sprites/Ken/duck.svg'
+                sprite='http://imgh.us/duck_1.svg'
                 shouldAnimate={duckMovP2}
                 fps={6}
                 startFrame={0}
@@ -214,7 +214,7 @@ class PlayerTwo extends Component {
                ref='sprite'
                width={48}
                height={70}
-               sprite='../src/sprites/Ken/jump.svg'
+               sprite='http://imgh.us/jump.svg'
                shouldAnimate={jumpMovP2}
                fps={1}
                startFrame={0}
@@ -232,7 +232,7 @@ class PlayerTwo extends Component {
                  ref='sprite'
                  width={30}
                  height={28}
-                 sprite='../src/sprites/Ken/haduken.svg'
+                 sprite='http://imgh.us/haduken_1.svg'
                  shouldAnimate={hadoukenBallP2}
                  fps={1}
                  startFrame={0}
@@ -250,7 +250,7 @@ class PlayerTwo extends Component {
                  ref='sprite'
                  width={112}
                  height={77.3}
-                 sprite='../src/sprites/Ken/hadukenMov.svg'
+                 sprite='http://imgh.us/hadukenMov.svg'
                  shouldAnimate={hadoukenMovP2}
                  fps={10}
                  startFrame={0}
@@ -267,7 +267,7 @@ class PlayerTwo extends Component {
                  ref='sprite'
                  width={128}
                  height={31.5}
-                 sprite='../src/sprites/Ken/dead.svg'
+                 sprite='http://imgh.us/dead_1.svg'
                  shouldAnimate={p2Status}
                  fps={1}
                  startFrame={0}
@@ -284,7 +284,7 @@ class PlayerTwo extends Component {
                  ref='sprite'
                  width={55}
                  height={124}
-                 sprite='../src/sprites/Ken/won.svg'
+                 sprite='http://imgh.us/won_1.svg'
                  shouldAnimate={p2Status}
                  fps={1}
                  startFrame={0}

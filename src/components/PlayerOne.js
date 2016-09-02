@@ -10,7 +10,7 @@ class PlayerOne extends Component {
   }
   handleStop() {
     // console.log(event);
-    if(event.code === "17") {
+    if(event.keyCode === 17) {
       this.props.punch(true, false, 0, "player-1")
     }
     if(event.code === "AltLeft") {
@@ -44,7 +44,7 @@ class PlayerOne extends Component {
       event.stopPropagation();
       this.props.moveBackward(3.4, 1, "player-1")
     }
-    if(event.code === 17) {
+    if(event.keyCode === 17) {
       event.preventDefault();
       event.stopPropagation();
       this.props.punch(false, true, 0, "player-1")
