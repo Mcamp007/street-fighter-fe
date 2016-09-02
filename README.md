@@ -5,7 +5,7 @@ We decided to re build the Acarde game Street Fighter in react using javascript.
 
 ### Problems/Difficulties we encountered
   - Spagethi code 
-  - default of keyboard combinations, some keyCodes if you held them down triggered continues attacks or apple keyboard shortcuts
+  - default of keyboard combinations, some keyCodes if you held them down triggered continues attacks or apple keyboard shortcuts.
   
 ### Process
   - started off whiteboarding everything, from logic to the frontend routes
@@ -22,7 +22,6 @@ We decided to re build the Acarde game Street Fighter in react using javascript.
   - LeftAlt => kick
   - control => punch
   - LeftShift => block
-  - 
 ###### P2
   - ? => forward
   - } => backwards 
