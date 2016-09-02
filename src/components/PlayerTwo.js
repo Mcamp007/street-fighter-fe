@@ -11,7 +11,7 @@ class PlayerTwo extends Component {
   }
   handleStop() {
     // console.log(event);
-    if(event.keyCode === 32) {
+    if(event.keyCode === 77) {
       this.props.punch(true, false, 0, "player-2")
     }
     if(event.keyCode === 222) {
@@ -49,7 +49,7 @@ class PlayerTwo extends Component {
     if (event.keyCode === 221 && this.props.moveStates.p2Location < this.props.moveStates.locationArr[this.props.moveStates.locationArr.length -1]) {
       this.props.moveBackward(3.4, 1, "player-2")
     }
-    if(event.keyCode === 32) {
+    if(event.keyCode === 77) {
       this.props.punch(false, true, 0, "player-2")
       console.log("punch")
     }
