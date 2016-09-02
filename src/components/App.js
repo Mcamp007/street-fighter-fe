@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      logo: ""
+      logo: "show-cover"
     }
   }
 
