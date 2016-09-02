@@ -11,7 +11,6 @@ We decided to re build the Acarde game Street Fighter in react using javascript.
   - started off whiteboarding everything, from logic to the frontend routes
   - testing the package 
   
-
 ### Instructions
 
 ###### P1
