@@ -35,41 +35,27 @@ class PlayerOne extends Component {
   movement() {
     // console.log(event);
     if( event.keyCode === 65 && this.props.moveStates.p1Location + 1 !== this.props.moveStates.p2Location) {
-      event.preventDefault();
-      event.stopPropagation();
       this.props.moveForward(3.4, 1, "player-1");
     }
     if( event.key === "1" && this.props.moveStates.p1Location > 0) {
-      event.preventDefault();
-      event.stopPropagation();
       this.props.moveBackward(3.4, 1, "player-1")
     }
     if(event.keyCode === 17) {
-      event.preventDefault();
-      event.stopPropagation();
       this.props.punch(false, true, 0, "player-1")
     }
     if(event.code === "AltLeft") {
-      event.preventDefault();
-      event.stopPropagation();
       console.log("P1 Kick")
       this.props.kick(false, true, 0, "player-1")
     }
     if(event.keyCode === 81){
-      event.preventDefault();
-      event.stopPropagation();
       this.props.duck(false, true, false, "player-1")
     }
     if(event.keyCode === 87) {
-      event.preventDefault();
-      event.stopPropagation();
       console.log("jumpp");
       this.props.jump(false, true, 10,"player-1")
       console.log(this.props.moveStates.marginBottomP1)
     }
     if(event.code === "ShiftLeft" && this.props.moveStates.blockAllowanceP1) {
-      event.preventDefault();
-      event.stopPropagation();
       this.props.block(true, "player-1")
       const self = this
       setTimeout(function() {
@@ -78,8 +64,6 @@ class PlayerOne extends Component {
     }
 
     if(event.keyCode === 90 && this.props.moveStates.hadoukenAllowance) {
-      event.preventDefault();
-      event.stopPropagation();
       this.props.hadouken(false, true, true, "visible", 3.4, false, 0, "player-1")
       const self = this
       const interval = setInterval(function() { self.props.ballMove(1, "player-1");
