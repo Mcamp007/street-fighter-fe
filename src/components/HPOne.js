@@ -8,7 +8,7 @@ export default class HPOne extends Component {
       left: 3 + 'vw',
       position: "absolute",
       color: 'white',
-      top: 0
+      margin: 0
     }
 
     const p1cont = {

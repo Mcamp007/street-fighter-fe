@@ -18,7 +18,6 @@ class App extends Component {
           <Nav>
             <NavItem><Link to='/gameboard'>Game</Link></NavItem>
             <NavItem><Link to='/highscores'>Highscores</Link></NavItem>
-            <NavItem><Link to='/about'>About</Link></NavItem>
           </Nav>
         </Navbar>
         {this.props.children}

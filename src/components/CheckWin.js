@@ -31,7 +31,7 @@ export default class Win extends Component {
           winner: "Its a tie",
           timer: self.props.time
         })
-        location.reload()
+        // location.reload()
       } else if(self.props.p1hp > self.props.p2hp) {
         self.setState({
           winner: "Hulk",
@@ -72,17 +72,23 @@ export default class Win extends Component {
     const visibility = {
       visibility: this.state.modalVisible
     }
+
+    const containerModal = {
+      top: 6 + 'vh',
+      textAlign: 'center'
+    }
     return (
       <div style={visibility}>
         <div className="static-modal">
-          <Modal.Dialog>
+          <Modal.Dialog style={containerModal}>
             <Modal.Header>
-              <Modal.Title>{this.state.winner} HP{this.state.winnerHP}Wins!!!</Modal.Title>
+              <Modal.Title>{this.state.winner.toUpperCase()} WON!</Modal.Title>
+              <Modal.Title>HP: {this.state.winnerHP}</Modal.Title>
+              <Modal.Title>Time: {this.state.timer}</Modal.Title>
                 </Modal.Header>
                   <Modal.Body>
                     <FormControl onChange={(event) => this.setState({input: event.target.value})} placeholder="Name" />
-                    <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Save changes</Button>
-                    <Modal.Title>{this.state.timer} seconds</Modal.Title>
+                    <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Save High Score</Button>
                   </Modal.Body>
 
           </Modal.Dialog>
