@@ -1,16 +1,16 @@
-# React Street Fighter
+# React Fighter
 https://warm-mountain-83404.herokuapp.com/
 
 #### Synopsis
-We decided to re build the Acarde game Street Fighter in react using javascript. The users are able challenge each other and the winner can save and view their time, and hp that was left. 
+We decided to rebuild the arcade game Street Fighter in React using ES6. The users are able challenge each other and the winner can save and view their time and HP. 
 
 ### Problems/Difficulties we encountered
-  - Spagethi code 
-  - default of keyboard combinations, some keyCodes if you held them down triggered continues attacks or apple keyboard shortcuts.
+  - Spaghetti code 
+  - Default of keyboard combinations; if you held down some key codes, they triggered continuous attacks or Apple keyboard shortcuts.
   
 ### Process
-  - started off whiteboarding everything, from logic to the frontend routes
-  - testing the package 
+  - Started off whiteboarding everything, from logic to the frontend routes
+  - Testing the package 
   
 ### Instructions
 
