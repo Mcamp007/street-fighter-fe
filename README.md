@@ -49,6 +49,11 @@ We decided to rebuild the arcade game Street Fighter in React using ES6. The use
       reset={!kickMovP1}
     />
     ```
+    
+    
+    ### Creators
+      - Caspar Nagel, username: casparen
+      -Hiro Narita, username: hironarita
 
 
 
